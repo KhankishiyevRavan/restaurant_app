@@ -32,6 +32,8 @@ export default function Menu() {
     const fetchData = async () => {
       const data = await getMenuItems();
       setMenuItems(data);
+      console.log(data);
+      
     };
     fetchData();
   }, []);
