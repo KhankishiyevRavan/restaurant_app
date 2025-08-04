@@ -48,7 +48,6 @@ export default function MenuAdmin() {
   const handleEdit = (id: string) => {
     navigate(`/admin/menu/edit/${id}`);
   };
-
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">{t("menu_list")}</h1>
@@ -67,7 +66,8 @@ export default function MenuAdmin() {
           {menuItems.map((item, index) => (
             <tr key={item._id} className="hover:bg-gray-50">
               <td className="border p-2">{index + 1}</td>
-              <td className="border p-2">{item.name[currentLang]}</td>
+              {/* ✅ optional chaining ilə */}
+              <td className="border p-2">{item.name?.[currentLang] || "-"}</td>
               <td className="border p-2">{item.price} $</td>
               <td className="border p-2">{item.category}</td>
               <td className="border p-2 flex gap-2">
