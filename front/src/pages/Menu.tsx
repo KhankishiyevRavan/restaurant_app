@@ -125,10 +125,10 @@ export default function Menu() {
                   </li>
                 </ul>
 
-                <button className="mt-4 w-full flex items-center justify-center gap-2 py-2 border rounded-xl text-gray-700 hover:bg-red-500 hover:text-white hover:border-red-500 transition">
+                {/* <button className="mt-4 w-full flex items-center justify-center gap-2 py-2 border rounded-xl text-gray-700 hover:bg-red-500 hover:text-white hover:border-red-500 transition">
                   <ShoppingCart className="w-5 h-5" />
                   {t("add_to_cart")}
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
