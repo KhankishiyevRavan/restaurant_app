@@ -96,7 +96,7 @@ export default function Menu() {
               <div className="relative">
                 <img
                   className="w-full h-48 object-cover"
-                  src={`http://localhost:5002${item.image || ""}`}
+                  src={`${import.meta.env.VITE_API_URL}${item.image || ""}`}
                   alt={item.name?.[currentLang] || "No name"}
                 />
                 <button className="absolute top-2 left-2 bg-white rounded-full p-2 shadow-md hover:scale-110 transition">
