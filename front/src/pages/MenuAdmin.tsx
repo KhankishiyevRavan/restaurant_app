@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteMenuItem, getMenuItems } from "../service/menuService";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
