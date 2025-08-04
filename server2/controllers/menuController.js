@@ -23,25 +23,45 @@ const getMenuItemById = async (req, res) => {
   }
 };
 
+// Yeməyi sil
+const deleteMenuItem = async (req, res) => {
+  try {
+    const item = await MenuItem.findByIdAndDelete(req.params.id);
+    if (!item) return res.status(404).json({ message: "Item not found" });
+    res.json({ message: "Item deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+function parseName(req) {
+  let name = req.body.name || {
+    az: req.body["name[az]"],
+    en: req.body["name[en]"],
+    ru: req.body["name[ru]"],
+  };
+
+  // Əgər string gəlirsə, parse et
+  if (typeof name === "string") {
+    try {
+      name = JSON.parse(name);
+    } catch {
+      return null;
+    }
+  }
+
+  return name;
+}
+
 // Yeni yemək əlavə et
 const createMenuItem = async (req, res) => {
-  console.log(req.body);
   try {
-
     const { price, time, rating, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
-    // `name[az]`, `name[en]`, `name[ru]` olaraq gələcək
-    const name = {
-      az: req.body["name[az]"],
-      en: req.body["name[en]"],
-      ru: req.body["name[ru]"],
-    };
-
-    if (!name.az || !name.en || !name.ru) {
-      return res
-        .status(400)
-        .json({ message: "Name in all languages required" });
+    const name = parseName(req);
+    if (!name || !name.az || !name.en || !name.ru) {
+      return res.status(400).json({ message: "Name in all languages required" });
     }
 
     const newItem = new MenuItem({
@@ -66,16 +86,9 @@ const updateMenuItem = async (req, res) => {
     const { price, time, rating, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : undefined;
 
-    const name = {
-      az: req.body["name[az]"],
-      en: req.body["name[en]"],
-      ru: req.body["name[ru]"],
-    };
-
-    if (!name.az || !name.en || !name.ru) {
-      return res
-        .status(400)
-        .json({ message: "Name in all languages required" });
+    const name = parseName(req);
+    if (!name || !name.az || !name.en || !name.ru) {
+      return res.status(400).json({ message: "Name in all languages required" });
     }
 
     const updatedItem = await MenuItem.findByIdAndUpdate(
@@ -91,23 +104,13 @@ const updateMenuItem = async (req, res) => {
       { new: true }
     );
 
-    if (!updatedItem)
+    if (!updatedItem) {
       return res.status(404).json({ message: "Item not found" });
+    }
 
     res.json(updatedItem);
   } catch (error) {
     res.status(400).json({ message: error.message });
-  }
-};
-
-// Yeməyi sil
-const deleteMenuItem = async (req, res) => {
-  try {
-    const item = await MenuItem.findByIdAndDelete(req.params.id);
-    if (!item) return res.status(404).json({ message: "Item not found" });
-    res.json({ message: "Item deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
 };
 
