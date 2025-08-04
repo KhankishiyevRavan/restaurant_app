@@ -26,6 +26,8 @@ const getMenuItemById = async (req, res) => {
 // Yeni yemək əlavə et
 const createMenuItem = async (req, res) => {
   try {
+    console.log(req.body);
+
     const { price, time, rating, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
