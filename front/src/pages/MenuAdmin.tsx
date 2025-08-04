@@ -20,8 +20,8 @@ type MenuItem = {
 
 export default function MenuAdmin() {
   const { i18n, t } = useTranslation();
-  type LangKey = "az" | "en" | "ru";
-  const currentLang = (i18n.language as LangKey) || "az";
+  type LangKey = keyof MenuItem["name"]; // "az" | "en" | "ru"
+  const currentLang: LangKey = (i18n.language as LangKey) || "az";
 
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const navigate = useNavigate();
