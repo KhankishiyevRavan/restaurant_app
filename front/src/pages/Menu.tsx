@@ -33,7 +33,6 @@ export default function Menu() {
       const data = await getMenuItems();
       setMenuItems(data);
       console.log(data);
-      
     };
     fetchData();
   }, []);
