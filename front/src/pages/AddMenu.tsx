@@ -17,6 +17,14 @@ export default function AddMenu() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log({
+      price,
+      time,
+      rating: Number(rating),
+      category,
+      image: image || undefined,
+    });
+
     await createMenuItem({
       name,
       price,
