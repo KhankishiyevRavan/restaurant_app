@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, Star, ShoppingCart, Heart, CheckCircle } from "lucide-react";
+import { Search, Star, Heart, CheckCircle } from "lucide-react";
 import { getMenuItems } from "../service/menuService";
 import { useTranslation } from "react-i18next";
 
