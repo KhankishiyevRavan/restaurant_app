@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import { Search, Star, Heart, CheckCircle } from "lucide-react";
-import { Search} from "lucide-react";
+import { Search } from "lucide-react";
 import { getMenuItems } from "../service/menuService";
 import { useTranslation } from "react-i18next";
 
@@ -86,7 +86,7 @@ export default function Menu() {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
           {filteredItems.map((item) => (
-            <></>
+            <>{item.image}</>
             // <div
             //   key={item._id}
             //   className="rounded-2xl overflow-hidden shadow-lg border bg-white hover:shadow-xl transition"
