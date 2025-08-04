@@ -31,8 +31,8 @@ export default function Menu() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getMenuItems();
-      setMenuItems(data);
       console.log(data);
+      setMenuItems(data);
     };
     fetchData();
   }, []);

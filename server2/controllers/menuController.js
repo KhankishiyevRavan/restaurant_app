@@ -14,7 +14,7 @@ const getMenuItems = async (req, res) => {
 const getMenuItemById = async (req, res) => {
   try {
     const item = await MenuItem.findById(req.params.id);
-    if (!item) return res.status(404).json({ message: "Item tapılmadı" });
+    if (!item) return res.status(404).json({ message: "Item not found" });
     res.json(item);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -24,12 +24,20 @@ const getMenuItemById = async (req, res) => {
 // Yeni yemək əlavə et
 const createMenuItem = async (req, res) => {
   try {
-    let { name, price, time, rating, category } = req.body;
+    const { price, time, rating, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
-    // name JSON string gələ bilər → parse et
-    if (typeof name === "string") {
-      name = JSON.parse(name);
+    // `name[az]`, `name[en]`, `name[ru]` olaraq gələcək
+    const name = {
+      az: req.body["name[az]"],
+      en: req.body["name[en]"],
+      ru: req.body["name[ru]"],
+    };
+
+    if (!name.az || !name.en || !name.ru) {
+      return res
+        .status(400)
+        .json({ message: "Name in all languages required" });
     }
 
     const newItem = new MenuItem({
@@ -48,14 +56,22 @@ const createMenuItem = async (req, res) => {
   }
 };
 
-// Yeməyi edit et
+// Yeməyi yenilə
 const updateMenuItem = async (req, res) => {
   try {
-    let { name, price, time, rating, category } = req.body;
+    const { price, time, rating, category } = req.body;
     const image = req.file ? `/uploads/${req.file.filename}` : undefined;
 
-    if (typeof name === "string") {
-      name = JSON.parse(name);
+    const name = {
+      az: req.body["name[az]"],
+      en: req.body["name[en]"],
+      ru: req.body["name[ru]"],
+    };
+
+    if (!name.az || !name.en || !name.ru) {
+      return res
+        .status(400)
+        .json({ message: "Name in all languages required" });
     }
 
     const updatedItem = await MenuItem.findByIdAndUpdate(
@@ -72,20 +88,20 @@ const updateMenuItem = async (req, res) => {
     );
 
     if (!updatedItem)
-      return res.status(404).json({ message: "Item tapılmadı" });
+      return res.status(404).json({ message: "Item not found" });
 
     res.json(updatedItem);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
+// Yeməyi sil
 const deleteMenuItem = async (req, res) => {
   try {
     const item = await MenuItem.findByIdAndDelete(req.params.id);
-
-    if (!item) return res.status(404).json({ message: "Item tapılmadı" });
-
-    res.json({ message: "Item uğurla silindi" });
+    if (!item) return res.status(404).json({ message: "Item not found" });
+    res.json({ message: "Item deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -96,5 +112,5 @@ module.exports = {
   getMenuItemById,
   createMenuItem,
   updateMenuItem,
-  deleteMenuItem
+  deleteMenuItem,
 };
