@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { Search, Star, ShoppingCart, Heart, CheckCircle } from "lucide-react";
 import { getMenuItems } from "../service/menuService";
+import { useTranslation } from "react-i18next";
 
 type MenuItem = {
   _id: string;
-  name: string;
+  name: {
+    az: string;
+    en: string;
+    ru: string;
+  };
   price: string;
   time: string;
   rating: number;
@@ -12,10 +17,14 @@ type MenuItem = {
   category: string;
 };
 
-const categories = ["All", "Breakfast", "Lunch", "Treats", "Dessert", "Drinks"];
+const categories = ["all", "breakfast", "lunch", "treats", "dessert", "drinks"];
 
 export default function Menu() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const { t, i18n } = useTranslation();
+  type LangKey = "az" | "en" | "ru";
+  const currentLang = (i18n.language as LangKey) || "az";
+
+  const [activeCategory, setActiveCategory] = useState("all");
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -23,24 +32,24 @@ export default function Menu() {
     const fetchData = async () => {
       const data = await getMenuItems();
       setMenuItems(data);
-      console.log(data);
-      
     };
     fetchData();
   }, []);
 
   // Filter (category + search)
-  const filteredItems = menuItems.filter(
-    (item) =>
-      (activeCategory === "All" || item.category === activeCategory) &&
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredItems = menuItems.filter((item) => {
+    const itemName = item.name[currentLang]?.toLowerCase() || "";
+    return (
+      (activeCategory === "all" || item.category === activeCategory) &&
+      itemName.includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className="min-h-screen bg-white mx-auto overflow-hidden">
       {/* Header */}
       <div className="flex justify-between items-center px-5 pt-6">
-        <h1 className="text-2xl font-bold">Menu</h1>
+        <h1 className="text-2xl font-bold">{t("menu")}</h1>
         <button className="bg-green-600 p-3 rounded-xl text-white">🛒</button>
       </div>
 
@@ -49,7 +58,7 @@ export default function Menu() {
         <Search className="absolute left-8 top-3 text-gray-400" size={20} />
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t("search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500"
@@ -69,7 +78,7 @@ export default function Menu() {
                   : "bg-white text-gray-600 hover:bg-gray-100"
               }`}
             >
-              {cat}
+              {t(`category.${cat}`)}
             </button>
           ))}
         </div>
@@ -85,8 +94,8 @@ export default function Menu() {
               <div className="relative">
                 <img
                   className="w-full h-48 object-cover"
-                  src={`http://localhost:5000${item.image}`}
-                  alt={item.name}
+                  src={`${import.meta.env.VITE_API_URL}${item.image}`}
+                  alt={item.name[currentLang]}
                 />
                 <button className="absolute top-2 left-2 bg-white rounded-full p-2 shadow-md hover:scale-110 transition">
                   <Heart className="text-red-500 w-5 h-5" />
@@ -106,7 +115,7 @@ export default function Menu() {
                 </div>
 
                 <h3 className="font-bold text-lg text-gray-800">
-                  {item.name}
+                  {item.name[currentLang]}
                 </h3>
 
                 <ul className="mt-2 space-y-1 text-gray-600 text-sm">
@@ -118,7 +127,7 @@ export default function Menu() {
 
                 <button className="mt-4 w-full flex items-center justify-center gap-2 py-2 border rounded-xl text-gray-700 hover:bg-red-500 hover:text-white hover:border-red-500 transition">
                   <ShoppingCart className="w-5 h-5" />
-                  Add to Cart
+                  {t("add_to_cart")}
                 </button>
               </div>
             </div>

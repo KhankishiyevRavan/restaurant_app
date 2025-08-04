@@ -1,16 +1,19 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+
 const {
   getMenuItems,
+  getMenuItemById,
   createMenuItem,
+  updateMenuItem,
+  deleteMenuItem,
 } = require("../controllers/menuController");
 
 const router = express.Router();
 
-// Multer config
-const fs = require("fs");
-
+// Uploads qovluğu
 const uploadDir = path.join(__dirname, "../uploads");
 
 // Əgər uploads qovluğu yoxdursa, yarat
@@ -18,6 +21,7 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
+// Multer config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -29,10 +33,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// GET bütün yeməklər
+// ✅ Bütün yeməklər
 router.get("/", getMenuItems);
 
-// POST yeni yemək (şəkil ilə birlikdə)
+// ✅ ID ilə yemək
+router.get("/:id", getMenuItemById);
+
+// ✅ Yeni yemək əlavə et (şəkil ilə birlikdə)
 router.post("/", upload.single("image"), createMenuItem);
+
+// ✅ Yeməyi edit et (şəkil optional)
+router.put("/:id", upload.single("image"), updateMenuItem);
+
+router.delete("/:id", deleteMenuItem); // 🔥 delete route
 
 module.exports = router;

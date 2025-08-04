@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/menu"; // lazım olsa .env-dən götür
+const API_URL = `${import.meta.env.VITE_API_URL}/api/menu`; // lazım olsa .env-dən götür
 
 // Bütün yeməkləri gətir
 export const getMenuItems = async () => {
@@ -8,18 +8,21 @@ export const getMenuItems = async () => {
   return res.data;
 };
 
-// Yeni yemək əlavə et (FormData ilə)
+// Yeni yemək əlavə et (FormData ilə, multilang support)
 export const createMenuItem = async (data: {
-  name: string;
+  name: { az: string; en: string; ru: string }; // artıq obyekt
   price: string;
   time?: string;
   rating?: number;
   category?: string;
-  image?: File; // şəkil file
+  image?: File;
 }) => {
   const formData = new FormData();
-  formData.append("name", data.name);
+
+  // name obyektini stringify edib göndəririk
+  formData.append("name", JSON.stringify(data.name));
   formData.append("price", data.price);
+
   if (data.time) formData.append("time", data.time);
   if (data.rating) formData.append("rating", String(data.rating));
   if (data.category) formData.append("category", data.category);
@@ -31,5 +34,9 @@ export const createMenuItem = async (data: {
     },
   });
 
+  return res.data;
+};
+export const deleteMenuItem = async (id: string) => {
+  const res = await axios.delete(`${API_URL}/${id}`);
   return res.data;
 };

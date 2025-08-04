@@ -1,11 +1,28 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createMenuItem } from "../service/menuService";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 
-export default function AddMenu() {
+type MenuItem = {
+  _id: string;
+  name: {
+    az: string;
+    en: string;
+    ru: string;
+  };
+  price: string;
+  time?: string;
+  rating?: number;
+  category?: string;
+  image?: string;
+};
+
+export default function EditMenu() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const [item, setItem] = useState<MenuItem | null>(null);
   const [name, setName] = useState({ az: "", en: "", ru: "" });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
@@ -13,31 +30,51 @@ export default function AddMenu() {
   const [category, setCategory] = useState("all");
   const [image, setImage] = useState<File | null>(null);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchItem = async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/menu/${id}`
+      );
+      const data = res.data;
+      setItem(data);
+      setName(data.name);
+      setPrice(data.price);
+      setTime(data.time || "");
+      setRating(data.rating || "");
+      setCategory(data.category || "all");
+    };
+    fetchItem();
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createMenuItem({
-      name,
-      price,
-      time,
-      rating: Number(rating),
-      category,
-      image: image || undefined,
+
+    const formData = new FormData();
+    formData.append("name", JSON.stringify(name));
+    formData.append("price", price);
+    if (time) formData.append("time", time);
+    if (rating) formData.append("rating", rating.toString());
+    if (category) formData.append("category", category);
+    if (image) formData.append("image", image);
+
+    await axios.put(`${import.meta.env.VITE_API_URL}/api/menu/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
 
-    navigate("/menu");
+    navigate("/admin/menu");
   };
+
+  if (!item) return <p>{t("loading")}...</p>;
 
   return (
     <div className="max-w-lg mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">➕ {t("add_new_menu")}</h1>
+      <h1 className="text-2xl font-bold mb-6">{t("edit_menu")}</h1>
 
       <form
         onSubmit={handleSubmit}
         className="space-y-4 bg-white p-6 rounded-xl shadow"
       >
-        {/* Multilanguage name inputs */}
+        {/* Multilanguage Name Inputs */}
         <input
           type="text"
           placeholder={`${t("name")} (AZ)`}
@@ -46,7 +83,6 @@ export default function AddMenu() {
           onChange={(e) => setName({ ...name, az: e.target.value })}
           required
         />
-
         <input
           type="text"
           placeholder={`${t("name")} (EN)`}
@@ -55,7 +91,6 @@ export default function AddMenu() {
           onChange={(e) => setName({ ...name, en: e.target.value })}
           required
         />
-
         <input
           type="text"
           placeholder={`${t("name")} (RU)`}
@@ -110,9 +145,18 @@ export default function AddMenu() {
           className="w-full"
         />
 
+        {/* Köhnə şəkil göstərin */}
+        {item.image && (
+          <img
+            src={`${import.meta.env.VITE_API_URL}${item.image}`}
+            alt="Preview"
+            className="w-32 h-32 object-cover mt-2"
+          />
+        )}
+
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded w-full"
+          className="bg-blue-600 text-white px-4 py-2 rounded w-full"
         >
           {t("save")}
         </button>

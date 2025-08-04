@@ -1,0 +1,25 @@
+{
+  "home": "Home",
+  "menu": "Menu",
+  "contact": "Contact",
+  "about": "About Us",
+  "add_new_menu": "Add New Menu Item",
+  "name": "Name",
+  "price": "Price",
+  "time_placeholder": "Time (e.g. 20 min)",
+  "rating_placeholder": "Rating (1-5)",
+  "save": "Save",
+  "category": {
+    "all": "All",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "treats": "Treats",
+    "dessert": "Dessert",
+    "drinks": "Drinks"
+  },
+  "menu_list": "Menu Items",
+  "edit": "Edit",
+  "delete": "Delete",
+  "actions": "Actions",
+  "confirm_delete": "Are you sure you want to delete?"
+}
