@@ -41,7 +41,7 @@ export default function Menu() {
     const itemName = item.name[currentLang]?.toLowerCase() || "";
     return (
       (activeCategory === "all" || item.category === activeCategory) &&
-      itemName.includes(searchTerm.toLowerCase())
+      itemName.includes(searchTerm?.toLowerCase())
     );
   });
 
