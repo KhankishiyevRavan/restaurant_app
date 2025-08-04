@@ -6,6 +6,7 @@ export default function Home() {
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+
   return (
     <div className="text-center mt-12">
       <h1 className="text-4xl font-bold mb-4">🍽 {t("welcome_title")}</h1>
@@ -13,24 +14,19 @@ export default function Home() {
 
       {/* Dil dəyişdirici düymələr - ortada */}
       <div className="flex justify-center space-x-4 mt-6">
-        <button
-          onClick={() => changeLanguage("az")}
-          className="px-4 py-2 border rounded text-gray-700 hover:bg-yellow-400 hover:text-white"
-        >
-          AZ
-        </button>
-        <button
-          onClick={() => changeLanguage("en")}
-          className="px-4 py-2 border rounded text-gray-700 hover:bg-yellow-400 hover:text-white"
-        >
-          EN
-        </button>
-        <button
-          onClick={() => changeLanguage("ru")}
-          className="px-4 py-2 border rounded text-gray-700 hover:bg-yellow-400 hover:text-white"
-        >
-          RU
-        </button>
+        {["az", "en", "ru"].map((lng) => (
+          <button
+            key={lng}
+            onClick={() => changeLanguage(lng)}
+            className={`px-4 py-2 border rounded transition ${
+              i18n.language === lng
+                ? "bg-yellow-400 text-white border-yellow-500"
+                : "text-gray-700 hover:bg-yellow-400 hover:text-white"
+            }`}
+          >
+            {lng.toUpperCase()}
+          </button>
+        ))}
       </div>
     </div>
   );
