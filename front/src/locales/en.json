@@ -21,5 +21,7 @@
   "edit": "Edit",
   "delete": "Delete",
   "actions": "Actions",
-  "confirm_delete": "Are you sure you want to delete?"
+  "confirm_delete": "Are you sure you want to delete?",
+  "welcome_title": "Welcome to Our Restaurant",
+  "welcome_subtitle": "Discover our tasty meals and drinks!"
 }
