@@ -4,7 +4,9 @@ const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
 
-dotenv.config();
+// .env faylını məhz server2 qovluğundan oxu
+dotenv.config({ path: path.join(__dirname, ".env") });
+
 const app = express();
 
 // Middleware
