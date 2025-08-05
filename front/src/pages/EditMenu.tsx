@@ -66,8 +66,9 @@ export default function EditMenu() {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
+    console.log(name);
 
-    navigate("/admin/menu");
+    // navigate("/admin/menu");
   };
 
   if (!item) return <p>{t("loading")}...</p>;
@@ -89,7 +90,7 @@ export default function EditMenu() {
           onChange={(e) => setName({ ...name, az: e.target.value })}
           required
         />
-        
+
         <input
           type="text"
           placeholder={`${t("name")} (TR)`}

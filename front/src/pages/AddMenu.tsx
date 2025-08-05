@@ -17,6 +17,8 @@ export default function AddMenu() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(name);
+
     await createMenuItem({
       name,
       price,
@@ -26,7 +28,7 @@ export default function AddMenu() {
       image: image || undefined,
     });
 
-    navigate("/menu");
+    // navigate("/menu");
   };
 
   return (
@@ -81,7 +83,7 @@ export default function AddMenu() {
           onChange={(e) => setName({ ...name, fr: e.target.value })}
           required
         />
-        
+
         <input
           type="text"
           placeholder={t("price")}
