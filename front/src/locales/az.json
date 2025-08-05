@@ -23,5 +23,8 @@
   "actions": "Əməliyyatlar",
   "confirm_delete": "Silmək istədiyinizə əminsinizmi?",
   "welcome_title": "Restoranımıza xoş gəlmisiniz",
-  "welcome_subtitle": "Dadlı yeməklərimizi və içkilərimizi kəşf edin!"
+  "welcome_subtitle": "Dadlı yeməklərimizi və içkilərimizi kəşf edin!",
+  "notfound_title": "Səhifə tapılmadı",
+  "notfound_subtitle": "Axtardığınız səhifə mövcud deyil və ya köçürülüb.",
+  "go_home": "Ana səhifəyə qayıt"
 }

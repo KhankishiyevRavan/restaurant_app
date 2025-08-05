@@ -23,5 +23,8 @@
   "actions": "Actions",
   "confirm_delete": "Are you sure you want to delete?",
   "welcome_title": "Welcome to Our Restaurant",
-  "welcome_subtitle": "Discover our tasty meals and drinks!"
+  "welcome_subtitle": "Discover our tasty meals and drinks!",
+  "notfound_title": "Page Not Found",
+  "notfound_subtitle": "The page you are looking for does not exist or has been moved.",
+  "go_home": "Go Back Home"
 }
