@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+// import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +22,7 @@ type MenuItem = {
 
 export default function EditMenu() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [item, setItem] = useState<MenuItem | null>(null);

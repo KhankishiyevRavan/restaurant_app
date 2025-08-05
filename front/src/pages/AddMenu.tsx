@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { createMenuItem } from "../service/menuService";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,7 @@ export default function AddMenu() {
   const [category, setCategory] = useState("all");
   const [image, setImage] = useState<File | null>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
