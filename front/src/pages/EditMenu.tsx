@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +21,7 @@ type MenuItem = {
 
 export default function EditMenu() {
   const { id } = useParams<{ id: string }>();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [item, setItem] = useState<MenuItem | null>(null);
@@ -60,16 +59,21 @@ export default function EditMenu() {
     if (category) formData.append("category", category);
     if (image) formData.append("image", image);
 
-    await axios.put(
-      `${import.meta.env.VITE_API_URL}/api/menu/${id}`,
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
-    console.log(name);
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/menu/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
-    // navigate("/admin/menu");
+      alert("✅ Menyu uğurla yeniləndi!");
+      navigate("/admin/menu");
+    } catch (error) {
+      console.error("❌ Xəta:", error);
+      alert("❌ Menyu yenilənmədi. Zəhmət olmasa yenidən yoxlayın!");
+    }
   };
 
   if (!item) return <p>{t("loading")}...</p>;

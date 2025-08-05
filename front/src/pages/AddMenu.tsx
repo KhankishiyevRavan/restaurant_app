@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createMenuItem } from "../service/menuService";
 import { useTranslation } from "react-i18next";
 
@@ -13,22 +13,28 @@ export default function AddMenu() {
   const [category, setCategory] = useState("all");
   const [image, setImage] = useState<File | null>(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(name);
 
-    await createMenuItem({
-      name,
-      price,
-      time,
-      rating: Number(rating),
-      category,
-      image: image || undefined,
-    });
+    try {
+      await createMenuItem({
+        name,
+        price,
+        time,
+        rating: Number(rating),
+        category,
+        image: image || undefined,
+      });
 
-    // navigate("/menu");
+      alert("✅ Menyu uğurla əlavə olundu!");
+      navigate("/menu");
+    } catch (error) {
+      console.error("Menu əlavə edilərkən xəta baş verdi:", error);
+      alert("❌ Menyu əlavə edilə bilmədi. Zəhmət olmasa yenidən yoxlayın!");
+    }
   };
 
   return (
