@@ -7,9 +7,10 @@ type MenuItem = {
   _id: string;
   name?: {
     az?: string;
-    tr?:string;
+    tr?: string;
     en?: string;
     ru?: string;
+    fr?: string;
   };
   price?: string;
   time?: string;
@@ -22,7 +23,7 @@ const categories = ["all", "breakfast", "lunch", "treats", "dessert", "drinks"];
 
 export default function Menu() {
   const { t, i18n } = useTranslation();
-  type LangKey = "az"| "tr" | "en" | "ru";
+  type LangKey = "az" | "tr" | "en" | "ru" | "fr";
   const currentLang: LangKey = (i18n.language as LangKey) || "az";
 
   const [activeCategory, setActiveCategory] = useState("all");
@@ -33,7 +34,7 @@ export default function Menu() {
     const fetchData = async () => {
       const data = await getMenuItems();
       console.log(data);
-      
+
       setMenuItems(data);
     };
     fetchData();

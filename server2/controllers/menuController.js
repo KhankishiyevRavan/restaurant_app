@@ -39,6 +39,7 @@ function parseName(req) {
     tr: req.body["name[tr]"],
     en: req.body["name[en]"],
     ru: req.body["name[ru]"],
+    fr: req.body["name[fr]"],
   };
 
   // Əgər string gəlirsə, parse et
@@ -60,7 +61,7 @@ const createMenuItem = async (req, res) => {
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
     const name = parseName(req);
-    if (!name || !name.az || !name.tr || !name.en || !name.ru) {
+    if (!name || !name.az || !name.tr || !name.en || !name.ru || !name.fr) {
       return res
         .status(400)
         .json({ message: "Name in all languages required" });
@@ -89,7 +90,7 @@ const updateMenuItem = async (req, res) => {
     const image = req.file ? `/uploads/${req.file.filename}` : undefined;
 
     const name = parseName(req);
-    if (!name || !name.az || !name.tr || !name.en || !name.ru) {
+    if (!name || !name.az || !name.tr || !name.en || !name.ru || !name.fr) {
       return res
         .status(400)
         .json({ message: "Name in all languages required" });

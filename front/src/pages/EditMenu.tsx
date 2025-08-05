@@ -10,6 +10,7 @@ type MenuItem = {
     tr: string;
     en: string;
     ru: string;
+    fr: string;
   };
   price: string;
   time?: string;
@@ -24,7 +25,7 @@ export default function EditMenu() {
   const { t } = useTranslation();
 
   const [item, setItem] = useState<MenuItem | null>(null);
-  const [name, setName] = useState({ az: "", tr: "", en: "", ru: "" });
+  const [name, setName] = useState({ az: "", tr: "", en: "", ru: "", fr: "" });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
   const [rating, setRating] = useState("");
@@ -110,6 +111,14 @@ export default function EditMenu() {
           className="border px-3 py-2 w-full rounded"
           value={name.ru}
           onChange={(e) => setName({ ...name, ru: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder={`${t("name")} (FR)`}
+          className="border px-3 py-2 w-full rounded"
+          value={name.fr}
+          onChange={(e) => setName({ ...name, fr: e.target.value })}
           required
         />
 

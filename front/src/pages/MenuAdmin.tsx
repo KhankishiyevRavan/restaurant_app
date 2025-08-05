@@ -11,6 +11,7 @@ type MenuItem = {
     tr:string;
     en: string;
     ru: string;
+    fr: string;
   };
   price: string;
   time?: string;

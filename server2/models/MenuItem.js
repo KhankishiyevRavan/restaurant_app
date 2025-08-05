@@ -7,6 +7,7 @@ const menuItemSchema = new mongoose.Schema(
       tr: { type: String, required: true },
       en: { type: String, required: true },
       ru: { type: String, required: true },
+      fr: { type: String, required: true },
     },
     price: { type: String, required: true, default: 0 },
     time: { type: String },

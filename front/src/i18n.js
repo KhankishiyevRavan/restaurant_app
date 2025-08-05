@@ -6,6 +6,7 @@ import az from "./locales/az.json";
 import tr from "./locales/tr.json";
 import en from "./locales/en.json";
 import ru from "./locales/ru.json";
+import fr from "./locales/fr.json";
 
 i18n
   .use(LanguageDetector) // browser dilini avtomatik aşkar edir
@@ -16,6 +17,7 @@ i18n
       en: { translation: en },
       tr: { translation: tr },
       ru: { translation: ru },
+      fr: { translation: fr },
     },
     fallbackLng: "az", // default dil
     interpolation: {
