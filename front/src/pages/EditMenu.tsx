@@ -89,6 +89,7 @@ export default function EditMenu() {
           onChange={(e) => setName({ ...name, az: e.target.value })}
           required
         />
+        
         <input
           type="text"
           placeholder={`${t("name")} (TR)`}
@@ -97,6 +98,7 @@ export default function EditMenu() {
           onChange={(e) => setName({ ...name, tr: e.target.value })}
           required
         />
+
         <input
           type="text"
           placeholder={`${t("name")} (EN)`}
@@ -105,6 +107,7 @@ export default function EditMenu() {
           onChange={(e) => setName({ ...name, en: e.target.value })}
           required
         />
+
         <input
           type="text"
           placeholder={`${t("name")} (RU)`}
@@ -113,6 +116,7 @@ export default function EditMenu() {
           onChange={(e) => setName({ ...name, ru: e.target.value })}
           required
         />
+
         <input
           type="text"
           placeholder={`${t("name")} (FR)`}
