@@ -13,12 +13,12 @@ export default function Home() {
       <p className="text-lg text-gray-600 mb-6">{t("welcome_subtitle")}</p>
 
       {/* Dil dəyişdirici düymələr - ortada */}
-      <div className="flex justify-center space-x-4 mt-6">
+      <div className="flex justify-center space-x-4 mt-6 flex-wrap gap-5">
         {["az", "tr", "en", "ru","fr"].map((lng) => (
           <button
             key={lng}
             onClick={() => changeLanguage(lng)}
-            className={`px-4 py-2 border rounded transition ${
+            className={`mr-0 border rounded transition w-50 h-20 ${
               i18n.language === lng
                 ? "bg-yellow-400 text-white border-yellow-500"
                 : "text-gray-700 hover:bg-yellow-400 hover:text-white"
