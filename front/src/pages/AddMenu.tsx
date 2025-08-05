@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 export default function AddMenu() {
   const { t } = useTranslation();
 
-  const [name, setName] = useState({ az: "", en: "", ru: "" });
+  const [name, setName] = useState({ az: "", tr: "", en: "", ru: "" });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
   const [rating, setRating] = useState("");
@@ -44,6 +44,14 @@ export default function AddMenu() {
           className="border px-3 py-2 w-full rounded"
           value={name.az}
           onChange={(e) => setName({ ...name, az: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder={`${t("name")} (TR)`}
+          className="border px-3 py-2 w-full rounded"
+          value={name.tr}
+          onChange={(e) => setName({ ...name, tr: e.target.value })}
           required
         />
 

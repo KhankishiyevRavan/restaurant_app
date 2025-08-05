@@ -8,6 +8,7 @@ type MenuItem = {
   _id: string;
   name: {
     az: string;
+    tr:string;
     en: string;
     ru: string;
   };

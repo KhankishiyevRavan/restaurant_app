@@ -7,6 +7,7 @@ type MenuItem = {
   _id: string;
   name: {
     az: string;
+    tr: string;
     en: string;
     ru: string;
   };
@@ -23,7 +24,7 @@ export default function EditMenu() {
   const { t } = useTranslation();
 
   const [item, setItem] = useState<MenuItem | null>(null);
-  const [name, setName] = useState({ az: "", en: "", ru: "" });
+  const [name, setName] = useState({ az: "", tr: "", en: "", ru: "" });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
   const [rating, setRating] = useState("");
@@ -57,9 +58,13 @@ export default function EditMenu() {
     if (category) formData.append("category", category);
     if (image) formData.append("image", image);
 
-    await axios.put(`${import.meta.env.VITE_API_URL}/api/menu/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/menu/${id}`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
 
     navigate("/admin/menu");
   };
@@ -81,6 +86,14 @@ export default function EditMenu() {
           className="border px-3 py-2 w-full rounded"
           value={name.az}
           onChange={(e) => setName({ ...name, az: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder={`${t("name")} (TR)`}
+          className="border px-3 py-2 w-full rounded"
+          value={name.tr}
+          onChange={(e) => setName({ ...name, tr: e.target.value })}
           required
         />
         <input

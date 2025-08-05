@@ -36,6 +36,7 @@ const deleteMenuItem = async (req, res) => {
 function parseName(req) {
   let name = req.body.name || {
     az: req.body["name[az]"],
+    tr: req.body["name[tr]"],
     en: req.body["name[en]"],
     ru: req.body["name[ru]"],
   };
@@ -59,8 +60,10 @@ const createMenuItem = async (req, res) => {
     const image = req.file ? `/uploads/${req.file.filename}` : "";
 
     const name = parseName(req);
-    if (!name || !name.az || !name.en || !name.ru) {
-      return res.status(400).json({ message: "Name in all languages required" });
+    if (!name || !name.az || !name.tr || !name.en || !name.ru) {
+      return res
+        .status(400)
+        .json({ message: "Name in all languages required" });
     }
 
     const newItem = new MenuItem({
@@ -86,8 +89,10 @@ const updateMenuItem = async (req, res) => {
     const image = req.file ? `/uploads/${req.file.filename}` : undefined;
 
     const name = parseName(req);
-    if (!name || !name.az || !name.en || !name.ru) {
-      return res.status(400).json({ message: "Name in all languages required" });
+    if (!name || !name.az || !name.tr || !name.en || !name.ru) {
+      return res
+        .status(400)
+        .json({ message: "Name in all languages required" });
     }
 
     const updatedItem = await MenuItem.findByIdAndUpdate(

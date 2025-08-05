@@ -7,6 +7,7 @@ type MenuItem = {
   _id: string;
   name?: {
     az?: string;
+    tr?:string;
     en?: string;
     ru?: string;
   };
@@ -21,7 +22,7 @@ const categories = ["all", "breakfast", "lunch", "treats", "dessert", "drinks"];
 
 export default function Menu() {
   const { t, i18n } = useTranslation();
-  type LangKey = "az" | "en" | "ru";
+  type LangKey = "az"| "tr" | "en" | "ru";
   const currentLang: LangKey = (i18n.language as LangKey) || "az";
 
   const [activeCategory, setActiveCategory] = useState("all");

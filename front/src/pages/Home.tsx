@@ -14,7 +14,7 @@ export default function Home() {
 
       {/* Dil dəyişdirici düymələr - ortada */}
       <div className="flex justify-center space-x-4 mt-6">
-        {["az", "en", "ru"].map((lng) => (
+        {["az", "tr", "en", "ru"].map((lng) => (
           <button
             key={lng}
             onClick={() => changeLanguage(lng)}

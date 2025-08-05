@@ -16,7 +16,7 @@ export const getMenuItemById = async (id: string) => {
 
 // Yeni yemək əlavə et
 export const createMenuItem = async (data: {
-  name: { az: string; en: string; ru: string };
+  name: { az: string; tr: string; en: string; ru: string };
   price: string;
   time?: string;
   rating?: number;
@@ -27,6 +27,7 @@ export const createMenuItem = async (data: {
 
   // hər dili ayrıca göndəririk
   formData.append("name[az]", data.name.az);
+  formData.append("name[tr]", data.name.tr);
   formData.append("name[en]", data.name.en);
   formData.append("name[ru]", data.name.ru);
 
@@ -47,7 +48,7 @@ export const createMenuItem = async (data: {
 export const updateMenuItem = async (
   id: string,
   data: {
-    name: { az: string; en: string; ru: string };
+    name: { az: string; tr: string; en: string; ru: string };
     price: string;
     time?: string;
     rating?: number;
@@ -58,6 +59,7 @@ export const updateMenuItem = async (
   const formData = new FormData();
 
   formData.append("name[az]", data.name.az);
+  formData.append("name[tr]", data.name.tr);
   formData.append("name[en]", data.name.en);
   formData.append("name[ru]", data.name.ru);
 
