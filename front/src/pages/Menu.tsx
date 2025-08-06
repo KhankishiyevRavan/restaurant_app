@@ -54,7 +54,7 @@ export default function Menu() {
       {/* Header */}
       <div className="flex justify-between items-center px-5 pt-6">
         <h1 className="text-2xl font-bold">{t("menu")}</h1>
-        <button className="bg-green-600 p-3 rounded-xl text-white">🛒</button>
+        {/* <button className="bg-green-600 p-3 rounded-xl text-white">🛒</button> */}
       </div>
 
       {/* Search */}
