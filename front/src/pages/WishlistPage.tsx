@@ -1,18 +1,20 @@
-// ✅ 4. WishlistPage.tsx
-
 import { getWishlist } from "../service/wishlistService";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-// import type { Product } from "../types/product";
 import ProductCard from "../components/ProductCard";
+import type { Product } from "../types/product";
 
 export default function WishlistPage() {
-  const [wishlist, setWishlist] = useState(getWishlist());
+  const [wishlist, setWishlist] = useState<Product[]>([]);
   const { t } = useTranslation();
-  // const currentLang = i18n.language as keyof Product["name"];
+
+  // Yükləndikdə və ya yeniləmə tələb olunduqda wishlist-i götür
+  const refreshWishlist = () => {
+    setWishlist(getWishlist());
+  };
 
   useEffect(() => {
-    setWishlist(getWishlist());
+    refreshWishlist();
   }, []);
 
   return (
@@ -23,16 +25,11 @@ export default function WishlistPage() {
       ) : (
         <div className="grid grid-cols-3 gap-4">
           {wishlist.map((item) => (
-            <ProductCard product={item} />
-            // <div key={item._id} className="border p-4 rounded-lg">
-            //   <img
-            //     src={`${import.meta.env.VITE_API_URL}${item.image}`}
-            //     alt={item.name?.[currentLang] || "No name"}
-            //     className="h-40 object-cover"
-            //   />
-            //   <h3>{item.name?.[currentLang] || t("no_name")}</h3>
-            //   <p>{item.price} ₼</p>
-            // </div>
+            <ProductCard
+              key={item._id}
+              product={item}
+              onWishlistToggle={refreshWishlist} // 📌 Əlavə etdik
+            />
           ))}
         </div>
       )}

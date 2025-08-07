@@ -13,9 +13,13 @@ import { useState } from "react";
 
 type ProductCardProps = {
   product: Product;
+  onWishlistToggle?: () => void; // 📌 Optional prop
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  onWishlistToggle,
+}: ProductCardProps) {
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
   const [wished, setWished] = useState(isWished(product._id));
@@ -32,6 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       addToWishlist(product);
       setWished(true);
     }
+    if (onWishlistToggle) onWishlistToggle(); // 📌 Burada çağırırıq
   };
 
   const handleCardClick = () => {
