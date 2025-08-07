@@ -41,9 +41,3 @@ export default function Home() {
     </div>
   );
 }
-
-//  className={`mr-0 border rounded transition w-50 h-20 ${
-//               i18n.language === lng
-//                 ? "bg-yellow-400 text-white border-yellow-500"
-//                 : "text-gray-700 hover:bg-yellow-400 hover:text-white"
-//             }`}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { Product } from "../context/wishlistContext";
 
 const API_URL = import.meta.env.VITE_API_URL + "/api/menu";
 
@@ -8,11 +9,6 @@ export const getMenuItems = async () => {
   return res.data;
 };
 
-// ID ilə yeməyi gətir
-export const getMenuItemById = async (id: string) => {
-  const res = await axios.get(`${API_URL}/${id}`);
-  return res.data;
-};
 
 // Yeni yemək əlavə et
 export const createMenuItem = async (data: {
@@ -82,4 +78,12 @@ export const updateMenuItem = async (
 export const deleteMenuItem = async (id: string) => {
   const res = await axios.delete(`${API_URL}/${id}`);
   return res.data;
+};
+
+// ID ilə yeməyi gətir
+export const getMenuItemById = async (id: string): Promise<Product> => {
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_URL}/api/menu/${id}`
+  );
+  return response.data;
 };
