@@ -3,13 +3,13 @@
 import { getWishlist } from "../service/wishlistService";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { Product } from "../types/product";
+// import type { Product } from "../types/product";
 import ProductCard from "../components/ProductCard";
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState(getWishlist());
-  const { i18n, t } = useTranslation();
-  const currentLang = i18n.language as keyof Product["name"];
+  const { t } = useTranslation();
+  // const currentLang = i18n.language as keyof Product["name"];
 
   useEffect(() => {
     setWishlist(getWishlist());
