@@ -30,5 +30,7 @@
   "go_home": "Retour à l'accueil",
   "wishlist_title": "Produits favoris",
   "wishlist_empty": "Aucun produit ajouté.",
-  "no_name": "Pas de nom"
+  "no_name": "Pas de nom",
+  "description": "Entrez des informations détaillées sur le plat...",
+   "edit_menu": "Modifier le menu"
 }

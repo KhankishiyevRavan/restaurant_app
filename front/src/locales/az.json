@@ -30,5 +30,7 @@
   "go_home": "Ana səhifəyə qayıt",
   "wishlist_title": "Sevilən məhsullar",
   "wishlist_empty": "Heç bir məhsul əlavə olunmayıb.",
-  "no_name": "Ad yoxdur"
+  "no_name": "Ad yoxdur",
+  "description": "Yemək haqqında ətraflı məlumat daxil edin...",
+  "edit_menu": "Menyunu redaktə et"
 }

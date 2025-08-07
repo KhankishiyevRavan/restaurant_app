@@ -30,5 +30,7 @@
   "go_home": "Go Back Home",
   "wishlist_title": "Wishlist",
   "wishlist_empty": "No items added yet.",
-  "no_name": "No name"
+  "no_name": "No name",
+  "description": "Enter detailed information about the dish...",
+  "edit_menu": "Edit Menu"
 }
