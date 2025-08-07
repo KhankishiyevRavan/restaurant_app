@@ -3,8 +3,7 @@ import { Search } from "lucide-react";
 import { getMenuItems } from "../service/menuService";
 import { useTranslation } from "react-i18next";
 import ProductCard from "../components/ProductCard";
-import type { Product } from "../context/wishlistContext";
-
+import type { Product } from "../types/product";
 
 const categories = ["all", "breakfast", "lunch", "treats", "dessert", "drinks"];
 

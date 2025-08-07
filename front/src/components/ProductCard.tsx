@@ -1,40 +1,41 @@
-import { CheckCircle, Star, Heart } from "lucide-react";
-import { useWishlist } from "../context/wishlistContext";
+// ✅ 3. ProductCard.tsx
+
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Heart, Star, CheckCircle } from "lucide-react";
+import {
+  addToWishlist,
+  removeFromWishlist,
+  isWished,
+} from "../service/wishlistService";
+import type { Product } from "../types/product";
+import { useState } from "react";
 
-// 🔹 Dəstəklənən dillər
-type LangKey = "az" | "tr" | "en" | "ru" | "fr";
-
-// 🔹 Məhsul interfeysi
-export interface Product {
-  _id: string;
-  name: Record<LangKey, string>;
-  image: string;
-  price: number;
-  rating?: number;
-  time?: string;
-  [key: string]: any;
-}
-
-interface ProductCardProps {
+type ProductCardProps = {
   product: Product;
-}
+};
 
-const ProductCard = ({ product }: ProductCardProps) => {
-  const { addToWishlist } = useWishlist();
-  const { t, i18n } = useTranslation();
+export default function ProductCard({ product }: ProductCardProps) {
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
+  const [wished, setWished] = useState(isWished(product._id));
+  const currentLang = i18n.language as keyof Product["name"];
 
-  const currentLang: LangKey = i18n.language as LangKey;
+  //   const wished = isWished(product._id);
+
+  const handleWishlistToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (wished) {
+      removeFromWishlist(product._id);
+      setWished(false);
+    } else {
+      addToWishlist(product);
+      setWished(true);
+    }
+  };
 
   const handleCardClick = () => {
     navigate(`/product/${product._id}`);
-  };
-
-  const handleWishlistClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Kart kliklənməsini blokla
-    addToWishlist(product);
   };
 
   return (
@@ -50,10 +51,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           alt={product.name?.[currentLang] || "No name"}
         />
         <button
-          onClick={handleWishlistClick}
-          className="absolute top-2 left-2 bg-white rounded-full p-2 shadow-md hover:scale-110 transition"
+          onClick={handleWishlistToggle}
+          className={`absolute top-2 left-2 rounded-full p-2 shadow-md hover:scale-110 transition ${
+            wished ? "bg-red-500 text-white" : "bg-white text-red-500"
+          }`}
         >
-          <Heart className="text-red-500 w-5 h-5" />
+          <Heart className={`w-5 h-5 ${wished ? "fill-white" : ""}`} />
         </button>
       </div>
 
@@ -61,7 +64,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="p-4">
         <div className="flex justify-between items-center mb-2">
           <span className="text-red-600 font-bold text-xl">
-            {product.price || "0"}$
+            {product.price || "0"}₼
           </span>
           <div className="flex items-center gap-1 text-sm text-gray-600">
             <Star className="text-yellow-500 w-4 h-4" />
@@ -82,6 +85,4 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
     </div>
   );
-};
-
-export default ProductCard;
+}

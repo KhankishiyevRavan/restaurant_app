@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import type { Product } from "../components/ProductCard";
 import { useTranslation } from "react-i18next";
 import { getMenuItemById } from "../service/menuService";
+import type { Product } from "../types/product";
 
 type LangKey = "az" | "tr" | "en" | "ru" | "fr";
 

@@ -1,37 +1,35 @@
-import { useWishlist, type LangKey } from "../context/wishlistContext";
-import { useTranslation } from "react-i18next";
+// ✅ 4. WishlistPage.tsx
 
-const WishlistPage = () => {
-  const { wishlist } = useWishlist();
-  const { i18n, t } = useTranslation();
+import { getWishlist } from "../service/wishlistService";
+import { useEffect, useState } from "react";
 
-  const currentLang: LangKey = i18n.language as LangKey;
+export default function WishlistPage() {
+  const [wishlist, setWishlist] = useState(getWishlist());
+
+  useEffect(() => {
+    setWishlist(getWishlist());
+  }, []);
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">{t("wishlist_title") || "Sevilən məhsullar"}</h2>
-
+      <h2 className="text-2xl font-bold mb-4">Sevilən məhsullar</h2>
       {wishlist.length === 0 ? (
-        <p>{t("wishlist_empty") || "Heç bir məhsul əlavə olunmayıb."}</p>
+        <p>Heç bir məhsul əlavə olunmayıb.</p>
       ) : (
         <div className="grid grid-cols-3 gap-4">
-          {wishlist.map((item, index) => (
-            <div key={index} className="border p-4 rounded-xl shadow-md bg-white">
+          {wishlist.map((item) => (
+            <div key={item._id} className="border p-4 rounded-lg">
               <img
                 src={`${import.meta.env.VITE_API_URL}${item.image}`}
-                alt={item.name?.[currentLang] || "No name"}
-                className="h-40 w-full object-cover rounded"
+                alt={item.name.az}
+                className="h-40 object-cover"
               />
-              <h3 className="mt-2 text-lg font-semibold text-gray-800">
-                {item.name?.[currentLang] || t("no_name")}
-              </h3>
-              <p className="text-red-600 font-bold">{item.price} ₼</p>
+              <h3>{item.name.az}</h3>
+              <p>{item.price} ₼</p>
             </div>
           ))}
         </div>
       )}
     </div>
   );
-};
-
-export default WishlistPage;
+}
