@@ -27,5 +27,8 @@
   "welcome_subtitle": "Dadlı yeməklərimizi və içkilərimizi kəşf edin!",
   "notfound_title": "Səhifə tapılmadı",
   "notfound_subtitle": "Axtardığınız səhifə mövcud deyil və ya köçürülüb.",
-  "go_home": "Ana səhifəyə qayıt"
+  "go_home": "Ana səhifəyə qayıt",
+  "wishlist_title": "Sevilən məhsullar",
+  "wishlist_empty": "Heç bir məhsul əlavə olunmayıb.",
+  "no_name": "Ad yoxdur"
 }

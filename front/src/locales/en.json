@@ -27,5 +27,8 @@
   "welcome_subtitle": "Discover our tasty meals and drinks!",
   "notfound_title": "Page Not Found",
   "notfound_subtitle": "The page you are looking for does not exist or has been moved.",
-  "go_home": "Go Back Home"
+  "go_home": "Go Back Home",
+  "wishlist_title": "Wishlist",
+  "wishlist_empty": "No items added yet.",
+  "no_name": "No name"
 }

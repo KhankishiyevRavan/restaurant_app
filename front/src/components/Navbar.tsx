@@ -18,6 +18,12 @@ export default function Navbar() {
           >
             {t("menu")}
           </Link>
+          <Link
+            to="/wishlist"
+            className="text-white font-medium hover:text-yellow-400"
+          >
+            {t("wishlist_title")}
+          </Link>
         </div>
       </div>
     </nav>

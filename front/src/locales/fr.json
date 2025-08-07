@@ -27,5 +27,8 @@
   "welcome_subtitle": "Découvrez nos délicieux plats et boissons !",
   "notfound_title": "Page non trouvée",
   "notfound_subtitle": "La page que vous recherchez n'existe pas ou a été déplacée.",
-  "go_home": "Retour à l'accueil"
+  "go_home": "Retour à l'accueil",
+  "wishlist_title": "Produits favoris",
+  "wishlist_empty": "Aucun produit ajouté.",
+  "no_name": "Pas de nom"
 }
