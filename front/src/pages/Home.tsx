@@ -25,7 +25,7 @@ export default function Home() {
           <button
             key={code}
             onClick={() => changeLanguage(code)}
-            className={`px-4 py-2 border rounded w-50 h-20 text-lg font-medium transition ${
+            className={`cursor-pointer px-4 py-2 border rounded w-50 h-20 text-lg font-medium transition ${
               i18n.language === code
                 ? "bg-yellow-400 text-white border-yellow-500"
                 : "text-gray-700 hover:bg-yellow-400 hover:text-white"
