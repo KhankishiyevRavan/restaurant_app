@@ -3,9 +3,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
+// importlar...
 type MenuItem = {
   _id: string;
   name: {
+    az: string;
+    tr: string;
+    en: string;
+    ru: string;
+    fr: string;
+  };
+  description: {
     az: string;
     tr: string;
     en: string;
@@ -26,6 +34,13 @@ export default function EditMenu() {
 
   const [item, setItem] = useState<MenuItem | null>(null);
   const [name, setName] = useState({ az: "", tr: "", en: "", ru: "", fr: "" });
+  const [description, setDescription] = useState({
+    az: "",
+    tr: "",
+    en: "",
+    ru: "",
+    fr: "",
+  });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
   const [rating, setRating] = useState("");
@@ -40,6 +55,9 @@ export default function EditMenu() {
       const data = res.data;
       setItem(data);
       setName(data.name);
+      setDescription(
+        data.description || { az: "", tr: "", en: "", ru: "", fr: "" }
+      );
       setPrice(data.price);
       setTime(data.time || "");
       setRating(data.rating || "");
@@ -53,6 +71,7 @@ export default function EditMenu() {
 
     const formData = new FormData();
     formData.append("name", JSON.stringify(name));
+    formData.append("description", JSON.stringify(description));
     formData.append("price", price);
     if (time) formData.append("time", time);
     if (rating) formData.append("rating", rating.toString());
@@ -87,50 +106,27 @@ export default function EditMenu() {
         className="space-y-4 bg-white p-6 rounded-xl shadow"
       >
         {/* Multilanguage Name Inputs */}
-        <input
-          type="text"
-          placeholder={`${t("name")} (AZ)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.az}
-          onChange={(e) => setName({ ...name, az: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (TR)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.tr}
-          onChange={(e) => setName({ ...name, tr: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (EN)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.en}
-          onChange={(e) => setName({ ...name, en: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (RU)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.ru}
-          onChange={(e) => setName({ ...name, ru: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (FR)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.fr}
-          onChange={(e) => setName({ ...name, fr: e.target.value })}
-          required
-        />
+        {["az", "tr", "en", "ru", "fr"].map((lang) => (
+          <div key={lang}>
+            <input
+              type="text"
+              placeholder={`${t("name")} (${lang.toUpperCase()})`}
+              className="border px-3 py-2 w-full rounded mb-2"
+              value={name[lang as keyof typeof name]}
+              onChange={(e) => setName({ ...name, [lang]: e.target.value })}
+              required
+            />
+            <textarea
+              placeholder={`${t("description")} (${lang.toUpperCase()})`}
+              className="border px-3 py-2 w-full rounded"
+              value={description[lang as keyof typeof description]}
+              onChange={(e) =>
+                setDescription({ ...description, [lang]: e.target.value })
+              }
+              required
+            />
+          </div>
+        ))}
 
         <input
           type="text"
@@ -177,7 +173,6 @@ export default function EditMenu() {
           className="w-full"
         />
 
-        {/* Köhnə şəkil göstərin */}
         {item.image && (
           <img
             src={`${import.meta.env.VITE_API_URL}${item.image}`}

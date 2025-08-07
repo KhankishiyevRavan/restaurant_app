@@ -3,16 +3,16 @@ import type { Product } from "../types/product";
 
 const API_URL = import.meta.env.VITE_API_URL + "/api/menu";
 
-// Bütün yeməkləri gətir
+// 🔹 Bütün yeməkləri gətir
 export const getMenuItems = async () => {
   const res = await axios.get(API_URL);
   return res.data;
 };
 
-
-// Yeni yemək əlavə et
+// 🔹 Yeni yemək əlavə et
 export const createMenuItem = async (data: {
-  name: { az: string; tr: string; en: string; ru: string; fr: string };
+  name: Record<string, string>;
+  description: Record<string, string>;
   price: string;
   time?: string;
   rating?: number;
@@ -21,12 +21,14 @@ export const createMenuItem = async (data: {
 }) => {
   const formData = new FormData();
 
-  // hər dili ayrıca göndəririk
-  formData.append("name[az]", data.name.az);
-  formData.append("name[tr]", data.name.tr);
-  formData.append("name[en]", data.name.en);
-  formData.append("name[ru]", data.name.ru);
-  formData.append("name[fr]", data.name.fr);
+  // ✅ Ad və təsviri hər dil üçün əlavə et
+  Object.entries(data.name).forEach(([lang, value]) =>
+    formData.append(`name[${lang}]`, value)
+  );
+
+  Object.entries(data.description).forEach(([lang, value]) =>
+    formData.append(`description[${lang}]`, value)
+  );
 
   formData.append("price", data.price);
   if (data.time) formData.append("time", data.time);
@@ -41,11 +43,12 @@ export const createMenuItem = async (data: {
   return res.data;
 };
 
-// Yeməyi yenilə (Edit)
+// 🔹 Yeməyi yenilə (Edit)
 export const updateMenuItem = async (
   id: string,
   data: {
-    name: { az: string; tr: string; en: string; ru: string; fr: string };
+    name: Record<string, string>;
+    description: Record<string, string>;
     price: string;
     time?: string;
     rating?: number;
@@ -55,11 +58,13 @@ export const updateMenuItem = async (
 ) => {
   const formData = new FormData();
 
-  formData.append("name[az]", data.name.az);
-  formData.append("name[tr]", data.name.tr);
-  formData.append("name[en]", data.name.en);
-  formData.append("name[ru]", data.name.ru);
-  formData.append("name[fr]", data.name.fr);
+  Object.entries(data.name).forEach(([lang, value]) =>
+    formData.append(`name[${lang}]`, value)
+  );
+
+  Object.entries(data.description).forEach(([lang, value]) =>
+    formData.append(`description[${lang}]`, value)
+  );
 
   formData.append("price", data.price);
   if (data.time) formData.append("time", data.time);
@@ -74,16 +79,14 @@ export const updateMenuItem = async (
   return res.data;
 };
 
-// Yeməyi sil
+// 🔹 Yeməyi sil
 export const deleteMenuItem = async (id: string) => {
   const res = await axios.delete(`${API_URL}/${id}`);
   return res.data;
 };
 
-// ID ilə yeməyi gətir
+// 🔹 ID ilə yeməyi gətir
 export const getMenuItemById = async (id: string): Promise<Product> => {
-  const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/api/menu/${id}`
-  );
+  const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };

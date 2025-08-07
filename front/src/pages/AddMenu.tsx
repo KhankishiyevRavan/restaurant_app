@@ -5,23 +5,29 @@ import { useTranslation } from "react-i18next";
 
 export default function AddMenu() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [name, setName] = useState({ az: "", tr: "", en: "", ru: "", fr: "" });
+  const [description, setDescription] = useState({
+    az: "",
+    tr: "",
+    en: "",
+    ru: "",
+    fr: "",
+  });
   const [price, setPrice] = useState("");
   const [time, setTime] = useState("");
   const [rating, setRating] = useState("");
   const [category, setCategory] = useState("all");
   const [image, setImage] = useState<File | null>(null);
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(name);
 
     try {
       await createMenuItem({
         name,
+        description,
         price,
         time,
         rating: Number(rating),
@@ -45,50 +51,28 @@ export default function AddMenu() {
         onSubmit={handleSubmit}
         className="space-y-4 bg-white p-6 rounded-xl shadow"
       >
-        {/* Multilanguage name inputs */}
-        <input
-          type="text"
-          placeholder={`${t("name")} (AZ)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.az}
-          onChange={(e) => setName({ ...name, az: e.target.value })}
-          required
-        />
-        <input
-          type="text"
-          placeholder={`${t("name")} (TR)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.tr}
-          onChange={(e) => setName({ ...name, tr: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (EN)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.en}
-          onChange={(e) => setName({ ...name, en: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (RU)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.ru}
-          onChange={(e) => setName({ ...name, ru: e.target.value })}
-          required
-        />
-
-        <input
-          type="text"
-          placeholder={`${t("name")} (FR)`}
-          className="border px-3 py-2 w-full rounded"
-          value={name.fr}
-          onChange={(e) => setName({ ...name, fr: e.target.value })}
-          required
-        />
+        {/* ✅ Ad və Açıqlama (Çoxdilli) */}
+        {["az", "tr", "en", "ru", "fr"].map((lang) => (
+          <div key={lang}>
+            <input
+              type="text"
+              placeholder={`${t("name")} (${lang.toUpperCase()})`}
+              className="border px-3 py-2 w-full rounded mb-2"
+              value={name[lang as keyof typeof name]}
+              onChange={(e) => setName({ ...name, [lang]: e.target.value })}
+              required
+            />
+            <textarea
+              placeholder={`${t("description")} (${lang.toUpperCase()})`}
+              className="border px-3 py-2 w-full rounded"
+              value={description[lang as keyof typeof description]}
+              onChange={(e) =>
+                setDescription({ ...description, [lang]: e.target.value })
+              }
+              required
+            />
+          </div>
+        ))}
 
         <input
           type="text"
