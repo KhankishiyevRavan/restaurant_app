@@ -23,6 +23,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const v = validate();
+    setRemember(false);
     if (v) {
       setError(v);
       return;
