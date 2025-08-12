@@ -3,19 +3,26 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
-
+const Role = require("./models/Role"); // Role modelini daxil edirik
+const User = require("./models/User");
+const authRoutes = require("./routes/authRoutes");
 // .env faylını məhz server2 qovluğundan oxu
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+
+    credentials: true,
+  })
+);
+// app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // şəkil göstərmək
-
-// DB Connect
-connectDB();
+app.use("/api/auth", authRoutes);
 const createAdminRole = async () => {
   try {
     const existingRole = await Role.findOne({ name: "admin" });
@@ -58,6 +65,7 @@ const createAdminUser = async () => {
       const admin = new User({
         fname: "admin",
         lname: "admin",
+        identityNumber: "fdafsdf12321",
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASS,
         role: adminRole._id, // Admin rolunun ObjectId-si istifadəçiyə təyin edilir
@@ -74,6 +82,9 @@ const createAdminUser = async () => {
 };
 
 // createAdminUser();
+// DB Connect
+connectDB();
+
 // Routes
 const menuRoutes = require("./routes/menuRoutes");
 app.use("/api/menu", menuRoutes);

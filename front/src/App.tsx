@@ -9,6 +9,8 @@ import EditMenu from "./pages/EditMenu";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import WishlistPage from "./pages/WishlistPage";
+import LoginPage from "./pages/SignInForm";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -18,11 +20,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/admin/addMenu" element={<AddMenu />} />
-          <Route path="/admin/menu" element={<MenuAdmin />} />
-          <Route path="/admin/menu/edit/:id" element={<EditMenu />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+
+          {/* Login səhifəsi */}
+          <Route path="/admin" element={<LoginPage />} />
+
+          {/* Admin üçün qorunan route-lar */}
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route path="addMenu" element={<AddMenu />} />
+            <Route path="menu" element={<MenuAdmin />} />
+            <Route path="menu/edit/:id" element={<EditMenu />} />
+          </Route>
+
+          {/* 404 səhifəsi */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
