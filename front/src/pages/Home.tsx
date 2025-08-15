@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const languages = [
   { code: "az", label: "AZ", flag: "/flags/az.png" },
@@ -10,9 +11,11 @@ const languages = [
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    navigate("/menu"); // Ana səhifəyə yönləndir
   };
 
   return (
@@ -32,7 +35,12 @@ export default function Home() {
             }`}
           >
             <div className="flex gap-3 items-center justify-center">
-              <img src={flag} alt={label} className="w-8 h-6 mb-1" style={{objectFit:"cover"}} />
+              <img
+                src={flag}
+                alt={label}
+                className="w-8 h-6 mb-1"
+                style={{ objectFit: "cover" }}
+              />
               <span>{label}</span>
             </div>
           </button>
