@@ -3,91 +3,66 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
-const Role = require("./models/Role"); // Role modelini daxil edirik
-const User = require("./models/User");
+
+const { notFound, errorHandler } = require("./middleware/error");
 const authRoutes = require("./routes/authRoutes");
-// .env faylını məhz server2 qovluğundan oxu
+const feedbackRoutes = require("./routes/feedbackRoutes");
+const waiterRoutes = require("./routes/waiterRoutes");
+const menuRoutes = require("./routes/menuRoutes");
+
+// .env faylını _bu_ qovluqdan oxu
 dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 
-// Middleware
+/* ---------------- Core Middlewares ---------------- */
+const allowlist = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean); // "http://localhost:5173,https://menu.example" -> ["http://...","https://..."]
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-
+    origin: (origin, cb) => {
+      // Postman/CLI origin = undefined olduqda icazə ver
+      if (!origin) return cb(null, true);
+      if (allowlist.length === 0 || allowlist.includes(origin))
+        return cb(null, true);
+      return cb(new Error("CORS blocked"), false);
+    },
     credentials: true,
   })
 );
-// app.use(cors());
-app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // şəkil göstərmək
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
+
+// Şəkillərə birbaşa çıxış
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+/* ---------------- Health ---------------- */
+app.get("/health", (_req, res) => res.json({ ok: true }));
+
+/* ---------------- Routes ---------------- */
 app.use("/api/auth", authRoutes);
-const createAdminRole = async () => {
-  try {
-    const existingRole = await Role.findOne({ name: "admin" });
-    if (!existingRole) {
-      const adminRole = new Role({
-        name: "admin",
-        permissions: ["create", "edit", "delete"], // Admin icazələri (istəyə uyğun əlavə edə bilərsiniz)
-      });
-      await adminRole.save();
-      console.log("✅ Admin role created");
-    } else {
-      console.log("ℹ️ Admin role already exists");
-    }
-  } catch (err) {
-    console.error("Error creating admin role:", err);
-  }
-};
-
-// createAdminRole();
-
-const createAdminUser = async () => {
-  try {
-    const existingAdmin = await User.findOne({
-      fname: "admin",
-      lname: "admin",
-    });
-
-    // Əgər admin istifadəçisi artıq varsa, məlumat veririk
-    if (!existingAdmin) {
-      // Admin rolunu tapırıq
-      const adminRole = await Role.findOne({ name: "admin" });
-
-      // Admin rolunu tapmaq olmazsa, xəbərdarlıq veririk
-      if (!adminRole) {
-        console.log("Error: Admin role not found");
-        return;
-      }
-
-      // Yeni admin istifadəçisi yaradılır
-      const admin = new User({
-        fname: "admin",
-        lname: "admin",
-        identityNumber: "fdafsdf12321",
-        email: process.env.ADMIN_EMAIL,
-        password: process.env.ADMIN_PASS,
-        role: adminRole._id, // Admin rolunun ObjectId-si istifadəçiyə təyin edilir
-      });
-
-      await admin.save();
-      console.log("✅ Admin user created");
-    } else {
-      console.log("ℹ️ Admin user already exists");
-    }
-  } catch (err) {
-    console.error("Error creating admin user:", err);
-  }
-};
-
-// createAdminUser();
-// DB Connect
-connectDB();
-
-// Routes
-const menuRoutes = require("./routes/menuRoutes");
+app.use("/api/waiters", waiterRoutes);
+app.use("/api/service-feedback", feedbackRoutes);
 app.use("/api/menu", menuRoutes);
 
+/* ---------------- Errors ---------------- */
+// 404 və ümumi errorlar routelardan sonra gəlir
+app.use(notFound);
+app.use(errorHandler);
+
+/* ---------------- Start Server after DB ---------------- */
 const PORT = process.env.PORT || 5002;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+(async () => {
+  try {
+    await connectDB(); // ⚠️ Gözləyirik
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ Mongo connect error:", err.message);
+    process.exit(1);
+  }
+})();
