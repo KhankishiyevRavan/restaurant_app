@@ -4,7 +4,7 @@ import { getWaiters } from "../service/waiterService";
 
 export default function ServiceFeedback() {
   const [waiters, setWaiters] = useState<Waiter[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchWaiters = async () => {
@@ -15,7 +15,7 @@ export default function ServiceFeedback() {
         setWaiters(data);
       } catch (err: any) {
         console.error("Error fetching waiters:", err);
-        setError(err.response?.data?.message || "Naməlum xəta");
+        // setError(err.response?.data?.message || "Naməlum xəta");
       }
     };
     fetchWaiters();

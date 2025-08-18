@@ -1,5 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { deleteWaiter, getWaiters, updateWaiter } from "../service/waiterService";
+import { useEffect, useState } from "react";
+import {
+  deleteWaiter,
+  getWaiters,
+  updateWaiter,
+} from "../service/waiterService";
 
 type RowWaiter = {
   _id?: string;
