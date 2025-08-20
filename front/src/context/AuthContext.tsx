@@ -1,111 +1,65 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { jwtDecode } from "jwt-decode";
 
-type User = {
-  id: string;
-  name: string;
-  email?: string;
-  role?: string;
-  // istəsən əlavə sahələr
-};
+// Типизация токена, если ты знаешь структуру JWT
+interface DecodedToken {
+  role: string;
+  email: string;
+}
 
-type AuthState = {
+// Тип контекста
+interface AuthContextType {
   token: string | null;
-  user: User | null;
-  isLoggedIn: boolean;
-};
-
-type LoginInput = {
-  token: string;
-  user: User;
-  rememberMe?: boolean; // true → localStorage, false → sessionStorage
-};
-
-type AuthContextValue = AuthState & {
-  login: (input: LoginInput) => void;
-  logout: () => void;
-  setUser: (u: User | null) => void; // profil yeniləmə üçün
-};
-
-const AuthContext = createContext<AuthContextValue | undefined>(undefined);
-
-// Storage açarları
-const TOKEN_KEY = "access_token";
-const USER_KEY = "user";
-
-function readFromStorage(): AuthState {
-  const token = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
-  const userRaw = localStorage.getItem(USER_KEY) || sessionStorage.getItem(USER_KEY);
-
-  let user: User | null = null;
-  if (userRaw) {
-    try { user = JSON.parse(userRaw); } catch { user = null; }
-  }
-  return { token, user, isLoggedIn: !!token };
+  setToken: (token: string | null) => void;
+  role: string | null;
+  email: string | null;
 }
 
-function clearBothStorages() {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
-  sessionStorage.removeItem(TOKEN_KEY);
-  sessionStorage.removeItem(USER_KEY);
+// Значение по умолчанию (можно пустые функции)
+export const AuthContext = createContext<AuthContextType>({
+  token: null,
+  setToken: () => {},
+  role: null,
+  email: null,
+});
+
+// Тип пропсов провайдера
+interface AuthProviderProps {
+  children: ReactNode;
 }
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [{ token, user, isLoggedIn }, setAuth] = useState<AuthState>(() => readFromStorage());
-
-  const login = useCallback((input: LoginInput) => {
-    const { token, user, rememberMe } = input;
-
-    // əvvəlcə hər ehtimala qarşı təmizlə
-    clearBothStorages();
-
-    const storage = rememberMe ? localStorage : sessionStorage;
-    storage.setItem(TOKEN_KEY, token);
-    storage.setItem(USER_KEY, JSON.stringify(user));
-
-    setAuth({ token, user, isLoggedIn: true });
-
-    // digər tablar üçün sync
-    window.dispatchEvent(new Event("storage"));
-  }, []);
-
-  const logout = useCallback(() => {
-    clearBothStorages();
-    setAuth({ token: null, user: null, isLoggedIn: false });
-
-    // digər tablar üçün sync
-    window.dispatchEvent(new Event("storage"));
-  }, []);
-
-  const setUserState = useCallback((u: User | null) => {
-    // aktiv hansı storage-dadırsa ora yaz
-    const hasLocal = !!localStorage.getItem(TOKEN_KEY);
-    const storage = hasLocal ? localStorage : sessionStorage;
-
-    if (u) storage.setItem(USER_KEY, JSON.stringify(u));
-    else storage.removeItem(USER_KEY);
-
-    setAuth((prev) => ({ ...prev, user: u }));
-    window.dispatchEvent(new Event("storage"));
-  }, []);
-
-  // Multi-tab / başqa komponentlərdən dəyişiklikləri eşit
-  useEffect(() => {
-    const onStorage = () => setAuth(readFromStorage());
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
-
-  const value = useMemo<AuthContextValue>(
-    () => ({ token, user, isLoggedIn, login, logout, setUser: setUserState }),
-    [token, user, isLoggedIn, login, logout, setUserState]
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("token") || sessionStorage.getItem("token") || null
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+  useEffect(() => {
+    const syncToken = () => {
+      const latestToken =
+        localStorage.getItem("token") || sessionStorage.getItem("token");
+      setToken(latestToken);
+    };
+    window.addEventListener("storage", syncToken);
+    return () => window.removeEventListener("storage", syncToken);
+  }, []);
 
-export function useAuth(): AuthContextValue {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within <AuthProvider>");
-  return ctx;
-}
+  let role: string | null = null;
+  let email: string | null = null;
+  try {
+    if (token) {
+      const decoded = jwtDecode<DecodedToken>(token);
+      role = decoded.role || null;
+      email = decoded.email || null;
+    }
+  } catch (error) {
+    console.error("Invalid token:", error);
+    role = null;
+    email = null;
+  }
+
+  return (
+    <AuthContext.Provider value={{ token, setToken, role, email }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
