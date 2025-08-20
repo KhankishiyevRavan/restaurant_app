@@ -5,7 +5,7 @@ interface CheckboxProps {
   checked: boolean;
   className?: string;
   id?: string;
-  name?:string;
+  name?: string;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
 }
@@ -19,6 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   className = "",
   disabled = false,
 }) => {
+  name ? "" : "";
   return (
     <label
       className={`flex items-center space-x-3 group cursor-pointer ${
