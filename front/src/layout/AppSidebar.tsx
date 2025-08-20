@@ -3,40 +3,10 @@ import { Link, useLocation } from "react-router";
 
 import {
   ChevronDownIcon,
-  DocsIcon,
-  DollarLineIcon,
-  GroupIcon,
   PencilIcon,
   PieChartIcon,
 } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
-import { ListIcon } from "lucide-react";
-interface permissionsDataInterface {
-  roles: Array<{
-    role: string; // ya ObjectId string kimi
-    permissions: {
-      create: boolean;
-      read: boolean;
-      edit: boolean;
-      delete: boolean;
-    };
-  }>;
-  contracts: {
-    change_status: boolean;
-    delete_documents: boolean;
-    upload_documents: boolean;
-    view_documents: boolean;
-    view_status: boolean;
-  };
-  finance: {
-    addBalance: boolean;
-    makePayment: boolean;
-    viewPayments: boolean;
-  };
-  users: {
-    add_user: boolean;
-  };
-}
 
 type NavItem = {
   name: string;
@@ -49,8 +19,7 @@ const othersItems: NavItem[] = [];
 
 const AppSidebar: React.FC = () => {
   const [role, setRole] = useState<string | null>(null);
-  const [permissions, setPermissions] =
-    useState<permissionsDataInterface | null>(null);
+
   const [localExpandedInitialized, setLocalExpandedInitialized] =
     useState(false);
   useEffect(() => {
@@ -67,10 +36,6 @@ const AppSidebar: React.FC = () => {
     const storedPermissions = localStorage.getItem("permissions");
     if (storedPermissions) {
       try {
-        const parsedPermissions = JSON.parse(storedPermissions);
-        if (Array.isArray(parsedPermissions.roles)) {
-          setPermissions(parsedPermissions);
-        }
       } catch (err) {
         console.error("Could not parse permissions from localStorage", err);
       }
@@ -84,6 +49,7 @@ const AppSidebar: React.FC = () => {
       const updatedRole = localStorage.getItem("role");
       setRole(updatedRole);
     };
+    console.log(role);
 
     window.addEventListener("storage", handleStorageChange);
 
@@ -92,14 +58,13 @@ const AppSidebar: React.FC = () => {
     };
   }, []);
 
-
   const navItems: NavItem[] = [
     {
       icon: <PieChartIcon />,
       name: "İdarə paneli",
       path: "/dashboard",
     },
-   
+
     {
       icon: <PencilIcon />,
       name: "Menyu",
@@ -134,7 +99,7 @@ const AppSidebar: React.FC = () => {
     // },
   ];
   const [hoveredItemIndex, setHoveredItemIndex] = useState<number | null>(null);
-  const { isExpanded, isMobileOpen, isHovered, setIsHovered, toggleSidebar } =
+  const { isExpanded, isMobileOpen, toggleSidebar } =
     useSidebar();
   const location = useLocation();
 
@@ -162,20 +127,17 @@ const AppSidebar: React.FC = () => {
 
       if (
         path === "/create-contract" &&
-        location.pathname.startsWith("/edit-contract") 
+        location.pathname.startsWith("/edit-contract")
       ) {
         return true;
       }
       if (
         path === "/create-contract" &&
-        location.pathname.startsWith("/create-contract") 
+        location.pathname.startsWith("/create-contract")
       ) {
         return true;
       }
-      if (
-        path === "/contracts" &&
-        location.pathname.startsWith("/contract/") 
-      ) {
+      if (path === "/contracts" && location.pathname.startsWith("/contract/")) {
         return true;
       }
 
@@ -188,7 +150,7 @@ const AppSidebar: React.FC = () => {
       if (
         path === "/create-sale" &&
         location.pathname.startsWith("/payments/new")
-      ) { 
+      ) {
         return true;
       }
 
@@ -198,10 +160,7 @@ const AppSidebar: React.FC = () => {
       ) {
         return true;
       }
-      if (
-        path === "/call" &&
-        location.pathname.startsWith("/call/")
-      ) {
+      if (path === "/call" && location.pathname.startsWith("/call/")) {
         return true;
       }
 
@@ -409,7 +368,7 @@ const AppSidebar: React.FC = () => {
                             : "hover:bg-gray-100 dark:hover:bg-gray-700"
                         }`}
                       >
-                        {subItem.name}  
+                        {subItem.name}
                       </Link>
                     </li>
                   ))}
