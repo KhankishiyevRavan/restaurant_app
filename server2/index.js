@@ -17,19 +17,43 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
 
 /* ---------------- Core Middlewares ---------------- */
-const allowlist = (process.env.CLIENT_URL || "")
+const raw = process.env.CLIENT_URL || "";
+const allowlist = raw
   .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean); // "http://localhost:5173,https://menu.example" -> ["http://...","https://..."]
+  .map((s) => s.trim().replace(/\/$/, "")) // ehtiyat üçün sondakı /-u sil
+  .filter(Boolean);
+
+app.use((req, _res, next) => {
+  // Diaqnostika üçün müvəqqəti log (sonra silərsən)
+  if (req.headers.origin) {
+    console.log("Origin:", req.headers.origin, "Allowlist:", allowlist);
+  }
+  next();
+});
 
 app.use(
   cors({
     origin: (origin, cb) => {
-      // Postman/CLI origin = undefined olduqda icazə ver
+      if (!origin) return cb(null, true); // Postman, curl
+      const o = origin.replace(/\/$/, "");
+      if (allowlist.includes(o)) return cb(null, true);
+      return cb(new Error(`CORS blocked: ${o}`));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
+
+// Preflight üçün də (opsional, amma faydalıdır)
+app.options(
+  "*",
+  cors({
+    origin: (origin, cb) => {
       if (!origin) return cb(null, true);
-      if (allowlist.length === 0 || allowlist.includes(origin))
-        return cb(null, true);
-      return cb(new Error("CORS blocked"), false);
+      const o = origin.replace(/\/$/, "");
+      if (allowlist.includes(o)) return cb(null, true);
+      return cb(new Error(`CORS blocked: ${o}`));
     },
     credentials: true,
   })
@@ -44,7 +68,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 /* ---------------- Routes ---------------- */
-app.use("/api/roles",roleRoutes);
+app.use("/api/roles", roleRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/waiters", waiterRoutes);
 app.use("/api/service-feedback", feedbackRoutes);
