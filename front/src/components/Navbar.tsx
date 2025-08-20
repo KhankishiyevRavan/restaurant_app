@@ -46,6 +46,12 @@ export default function Navbar() {
           >
             {t("wishlist_title")}
           </Link>
+          <Link
+            to="/serviceFeedback"
+            className="text-white font-medium hover:text-yellow-400"
+          >
+            {t("rate_service")}
+          </Link>
         </div>
 
         {/* Sağ tərəf: login/logout */}

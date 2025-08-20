@@ -32,5 +32,6 @@
   "wishlist_empty": "Aucun produit ajouté.",
   "no_name": "Pas de nom",
   "description": "Entrez des informations détaillées sur le plat...",
-   "edit_menu": "Modifier le menu"
+  "edit_menu": "Modifier le menu",
+  "rate_service": "Évaluez le service"
 }
