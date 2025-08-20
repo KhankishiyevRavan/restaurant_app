@@ -20,7 +20,6 @@ export default function PackagesTable() {
   const [servicePackages, setServicePackages] = useState<
     ServicePackageInterface[]
   >([]);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -31,7 +30,6 @@ export default function PackagesTable() {
         setServicePackages(data);
       } catch (err: any) {
         console.error("Error fetching servicePackages:", err);
-        setError(err.response?.data?.message || "Naməlum xəta");
       }
     };
 
