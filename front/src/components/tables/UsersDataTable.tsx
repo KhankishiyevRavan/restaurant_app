@@ -11,7 +11,6 @@ import {
 } from "../ui/table";
 import Badge from "../ui/badge/Badge";
 import {
-  deleteUser,
   getAllUsers,
   userDataInterface,
 } from "../../services/userService";
@@ -19,12 +18,10 @@ import { useNavigate } from "react-router";
 import Button from "../ui/button/Button";
 import { ArrowLeft, ArrowRight, LucideEye } from "lucide-react";
 import { getAllRoles } from "../../services/roleService";
-import { EyeIcon } from "../../icons";
 
 export default function UsersDataTable() {
   const navigate = useNavigate();
   const [users, setUsers] = useState<userDataInterface[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [roles, setRoles] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(() => {
@@ -43,7 +40,6 @@ export default function UsersDataTable() {
       setUsers(data);
     } catch (err: any) {
       console.error("Error fetching users:", err);
-      setError(err.response?.data?.message || "Naməlum xəta");
       setUsers([]);
     }
   };

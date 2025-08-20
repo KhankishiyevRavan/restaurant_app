@@ -8,14 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { useNavigate } from "react-router";
 import { getAllRepairs, Repair } from "../../services/repairService";
 
 export default function RepairsTable() {
-  const navigate = useNavigate();
 
   const [operators, setOperators] = useState<Repair[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOperators = async () => {
@@ -26,7 +23,6 @@ export default function RepairsTable() {
         setOperators(data);
       } catch (err: any) {
         console.error("Error fetching operators:", err);
-        setError(err.response?.data?.message || "Naməlum xəta");
       }
     };
 
