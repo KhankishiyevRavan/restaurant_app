@@ -7,7 +7,7 @@ import {
   addToWishlist,
   removeFromWishlist,
   isWished,
-} from "../services/wishlistService";
+} from "../service/wishlistService";
 import type { Product } from "../types/product";
 import { useState } from "react";
 

@@ -1,28 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const { t } = useTranslation();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Token yoxlama
-  // useEffect(() => {
-  //   const token =
-  //     localStorage.getItem("access_token") ||
-  //     sessionStorage.getItem("access_token");
-  //   setIsLoggedIn(!!token);
-  // }, []);
+  useEffect(() => {
+    const token =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
+    setIsLoggedIn(!!token);
+  }, []);
 
-  // const handleLogout = () => {
-  //   // Tokenləri sil
-  //   localStorage.removeItem("access_token");
-  //   localStorage.removeItem("user");
-  //   sessionStorage.removeItem("access_token");
-  //   sessionStorage.removeItem("user");
+  const handleLogout = () => {
+    // Tokenləri sil
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("user");
 
-  //   setIsLoggedIn(false);
-  //   navigate("/"); // Ana səhifəyə yönləndir
-  // };
+    setIsLoggedIn(false);
+    navigate("/"); // Ana səhifəyə yönləndir
+  };
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -46,7 +48,19 @@ export default function Navbar() {
           </Link>
         </div>
 
-       
+        {/* Sağ tərəf: login/logout */}
+        <div>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="text-white font-medium hover:text-yellow-400"
+            >
+              {t("logout") || "Çıxış et"}
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </nav>
   );
