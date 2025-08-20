@@ -99,7 +99,6 @@ export default function SignInForm() {
       const data = await loginUser({
         email,
         password,
-        recaptchaToken: captchaValue,
       });
 
       if (data?.token) {
