@@ -10,7 +10,6 @@ import Input from "../../components/form/input/InputField";
 import Radio from "../../components/form/input/Radio";
 import { EyeCloseIcon, EyeIcon, InfoIcon } from "../../icons";
 // import AddressSection from "../../components/form/AddressSection";
-import PhoneInput from "../../components/form/group-input/PhoneInput";
 import DatePicker from "../../components/form/date-picker";
 import PhoneInputAz from "../../components/form/group-input/PhoneInputAz";
 
@@ -18,7 +17,6 @@ export default function CreateUserDataForm() {
   const navigate = useNavigate();
   const [roles, setRoles] = useState<any[]>([]);
   const [options, setOptions] = useState<any[]>([]);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchRoles = async () => {
@@ -28,7 +26,6 @@ export default function CreateUserDataForm() {
         setRoles(data); // Rolları state-ə saxlayırıq
       } catch (err: any) {
         console.log(err.response);
-        setError(err?.response?.data?.message);
         alert(err?.response?.data?.message);
         console.error("Error fetching roles:", err);
       }
