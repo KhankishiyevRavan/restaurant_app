@@ -225,7 +225,7 @@ export default function SignInForm() {
                     </div>
                   )}
                   <ReCAPTCHA
-                    sitekey="6LfvF0srAAAAAJfzishqpIoM08KJSt4JZrO2jt3l"
+                    sitekey="6LcucasrAAAAALBZZUuI9TdHE1A1jsWIlEt6H7CC"
                     onChange={onCaptchaChange}
                     ref={recaptchaRef}
                   />
