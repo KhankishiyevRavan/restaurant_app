@@ -19,7 +19,7 @@ function Stars({
   value: number;
   onChange: (v: number) => void;
 }) {
-  const { t } = useTranslation("feedback");
+  const { t } = useTranslation("");
   return (
     <div className="flex gap-1" role="radiogroup" aria-label={t("rating")}>
       {Array.from({ length: 5 }).map((_, i) => {
@@ -58,7 +58,7 @@ function ImagePicker({
   maxImages: number;
   maxFileSizeMB?: number;
 }) {
-  const { t } = useTranslation("feedback");
+  const { t } = useTranslation("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const objectUrlsRef = useRef<string[]>([]);
 
