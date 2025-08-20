@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   server: {
     host: "0.0.0.0", // Hər yerdən gələn bağlantılara icazə verir
-    port: 5175, // İstədiyiniz portu təyin edin
+    port: 5176, // İstədiyiniz portu təyin edin
     allowedHosts: ["app.xengeland.az"],
     proxy: {
       "/api": {
