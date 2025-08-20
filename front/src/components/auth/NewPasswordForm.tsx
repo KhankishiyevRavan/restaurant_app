@@ -3,11 +3,8 @@ import { EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 // import { resetPasswordWithToken } from "../../services/authService";
-import { useNavigate, useParams } from "react-router";
 
 export default function NewPasswordForm() {
-  const navigate = useNavigate();
-  const { token } = useParams();
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [errors, setErrors] = useState<{

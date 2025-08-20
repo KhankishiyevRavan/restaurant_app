@@ -8,15 +8,6 @@ interface AddressProps {
   disabled?: boolean;
 }
 
-const countries = [
-  { value: "", label: "--Select Country--" },
-  { value: "AZ", label: "Azerbaijan" },
-  { value: "US", label: "United States" },
-  { value: "UK", label: "United Kingdom" },
-  { value: "TR", label: "Turkey" },
-  { value: "DE", label: "Germany" },
-];
-
 export default function AddressSection({
   address,
   setAddress,
