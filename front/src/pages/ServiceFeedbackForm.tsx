@@ -150,7 +150,7 @@ export default function ServiceFeedbackForm({
   minImages = 1,
   onSubmitted,
 }: ServiceFeedbackFormProps) {
-  const { t } = useTranslation("feedback");
+  const { t } = useTranslation();
 
   const [rating, setRating] = useState(0); // 1-5
   const [waiterId, setWaiterId] = useState("");
