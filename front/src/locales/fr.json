@@ -33,5 +33,28 @@
   "no_name": "Pas de nom",
   "description": "Entrez des informations détaillées sur le plat...",
   "edit_menu": "Modifier le menu",
-  "rate_service": "Évaluez le service"
+  "rate_service": "Évaluez le service",
+  "form_title": "Satisfaction du service",
+  "rating": "Note",
+  "rating_hint": "1 est le plus faible, 5 est le meilleur",
+  "star_number": "{{count}} étoile",
+  "waiter": "Serveur",
+  "select_placeholder": "Sélectionner...",
+  "message_label": "Message (facultatif)",
+  "message_placeholder": "Vous pouvez laisser un court commentaire...",
+  "images": "Images",
+  "images_hint": "Jusqu’à {{max}} images ({{size}} Mo chacune)",
+  "remove_image": "Supprimer l’image",
+  "remove": "Supprimer",
+  "error": {
+    "required_rating": "Veuillez donner une note (1–5).",
+    "required_waiter": "Veuillez sélectionner un serveur.",
+    "min_images": "Téléversez au moins {{min}} image(s).",
+    "max_images": "Vous pouvez téléverser au maximum {{max}} images.",
+    "unknown": "Une erreur inconnue s’est produite."
+  },
+  "success": "Merci ! Votre avis a été enregistré.",
+  "submit": "Envoyer",
+  "submitting": "Envoi…",
+  "limits_hint": "Minimum {{min}}, maximum {{max}} images."
 }

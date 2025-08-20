@@ -33,5 +33,28 @@
   "no_name": "Ad yoxdur",
   "description": "Yemək haqqında ətraflı məlumat daxil edin...",
   "edit_menu": "Menyunu redaktə et",
-  "rate_service": "Xidməti dəyərləndirin"
+  "rate_service": "Xidməti dəyərləndirin",
+  "form_title": "Servis məmnuniyyəti",
+  "rating": "Reytinq",
+  "rating_hint": "1 ən zəif, 5 ən yaxşı",
+  "star_number": "{{count}} ulduz",
+  "waiter": "Ofisiant",
+  "select_placeholder": "Seçin...",
+  "message_label": "Mesaj (istəyə bağlı)",
+  "message_placeholder": "Qısa şərhinizi yaza bilərsiniz...",
+  "images": "Şəkillər",
+  "images_hint": "Maksimum {{max}} şəkil ({{size}} MB hər biri)",
+  "remove_image": "Şəkli sil",
+  "remove": "Sil",
+  "error": {
+    "required_rating": "Zəhmət olmasa reytinq verin (1–5).",
+    "required_waiter": "Zəhmət olmasa ofisiant seçin.",
+    "min_images": "Minimum {{min}} şəkil yükləməlisiniz.",
+    "max_images": "Maksimum {{max}} şəkil yükləyə bilərsiniz.",
+    "unknown": "Naməlum xəta baş verdi."
+  },
+  "success": "Təşəkkürlər! Rəyiniz qeydə alındı.",
+  "submit": "Göndər",
+  "submitting": "Göndərilir...",
+  "limits_hint": "Minimum {{min}}, maksimum {{max}} şəkil."
 }

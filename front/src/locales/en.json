@@ -33,5 +33,28 @@
   "no_name": "No name",
   "description": "Enter detailed information about the dish...",
   "edit_menu": "Edit Menu",
-  "rate_service": "Rate the service"
+  "rate_service": "Rate the service",
+  "form_title": "Service satisfaction",
+  "rating": "Rating",
+  "rating_hint": "1 is the lowest, 5 is the best",
+  "star_number": "{{count}} star",
+  "waiter": "Waiter",
+  "select_placeholder": "Select...",
+  "message_label": "Message (optional)",
+  "message_placeholder": "You can leave a short comment...",
+  "images": "Images",
+  "images_hint": "Up to {{max}} images ({{size}} MB each)",
+  "remove_image": "Remove image",
+  "remove": "Remove",
+  "error": {
+    "required_rating": "Please give a rating (1–5).",
+    "required_waiter": "Please select a waiter.",
+    "min_images": "You must upload at least {{min}} image(s).",
+    "max_images": "You can upload at most {{max}} images.",
+    "unknown": "An unknown error occurred."
+  },
+  "success": "Thanks! Your feedback has been recorded.",
+  "submit": "Submit",
+  "submitting": "Submitting...",
+  "limits_hint": "Minimum {{min}}, maximum {{max}} images."
 }

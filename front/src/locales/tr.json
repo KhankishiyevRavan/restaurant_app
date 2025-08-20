@@ -33,5 +33,28 @@
   "no_name": "İsim yok",
   "description": "Yemek hakkında detaylı bilgi girin...",
   "edit_menu": "Menüyü düzenle",
-  "rate_service": "Hizmeti değerlendirin"
+  "rate_service": "Hizmeti değerlendirin",
+  "form_title": "Hizmet memnuniyeti",
+  "rating": "Puan",
+  "rating_hint": "1 en zayıf, 5 en iyi",
+  "star_number": "{{count}} yıldız",
+  "waiter": "Garson",
+  "select_placeholder": "Seçiniz...",
+  "message_label": "Mesaj (isteğe bağlı)",
+  "message_placeholder": "Kısa bir yorum yazabilirsiniz...",
+  "images": "Görseller",
+  "images_hint": "Maksimum {{max}} görsel (her biri {{size}} MB)",
+  "remove_image": "Görseli kaldır",
+  "remove": "Sil",
+  "error": {
+    "required_rating": "Lütfen 1–5 arasında puan verin.",
+    "required_waiter": "Lütfen bir garson seçin.",
+    "min_images": "En az {{min}} görsel yüklemelisiniz.",
+    "max_images": "En fazla {{max}} görsel yükleyebilirsiniz.",
+    "unknown": "Bilinmeyen bir hata oluştu."
+  },
+  "success": "Teşekkürler! Geri bildiriminiz kaydedildi.",
+  "submit": "Gönder",
+  "submitting": "Gönderiliyor...",
+  "limits_hint": "En az {{min}}, en fazla {{max}} görsel."
 }
