@@ -17,43 +17,19 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
 
 /* ---------------- Core Middlewares ---------------- */
-const raw = process.env.CLIENT_URL || "";
-const allowlist = raw
+const allowlist = (process.env.CLIENT_URL || "")
   .split(",")
-  .map((s) => s.trim().replace(/\/$/, "")) // ehtiyat üçün sondakı /-u sil
-  .filter(Boolean);
-
-app.use((req, _res, next) => {
-  // Diaqnostika üçün müvəqqəti log (sonra silərsən)
-  if (req.headers.origin) {
-    console.log("Origin:", req.headers.origin, "Allowlist:", allowlist);
-  }
-  next();
-});
+  .map((s) => s.trim())
+  .filter(Boolean); // "http://localhost:5173,https://menu.example" -> ["http://...","https://..."]
 
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // Postman, curl
-      const o = origin.replace(/\/$/, "");
-      if (allowlist.includes(o)) return cb(null, true);
-      return cb(new Error(`CORS blocked: ${o}`));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  })
-);
-
-// Preflight üçün də (opsional, amma faydalıdır)
-app.options(
-  "*",
-  cors({
-    origin: (origin, cb) => {
+      // Postman/CLI origin = undefined olduqda icazə ver
       if (!origin) return cb(null, true);
-      const o = origin.replace(/\/$/, "");
-      if (allowlist.includes(o)) return cb(null, true);
-      return cb(new Error(`CORS blocked: ${o}`));
+      if (allowlist.length === 0 || allowlist.includes(origin))
+        return cb(null, true);
+      return cb(new Error("CORS blocked"), false);
     },
     credentials: true,
   })
