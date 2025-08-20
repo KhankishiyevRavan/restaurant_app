@@ -40,7 +40,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <select
-      className={`...`}
+      className={className}
       value={selectedValue}
       onChange={handleChange}
       // remove defaultValue from here

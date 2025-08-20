@@ -2,7 +2,6 @@ import { VerifiedIcon } from "lucide-react";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
-  BoxIconLine,
   GroupIcon,
 } from "../../icons";
 import Badge from "../ui/badge/Badge";
