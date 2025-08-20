@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Ecommerce Dashboard"
-        description="This is MENU.AZ Ecommerce Dashboard page"
+        title="XENGELAND.AZ | Ecommerce Dashboard"
+        description="This is XENGELAND.AZ Ecommerce Dashboard page"
       />
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6 xl:col-span-7">

@@ -395,7 +395,7 @@ const AppSidebar: React.FC = () => {
         }`}
       >
         <Link to="/" className="logo-link">
-          {isExpanded || isMobileOpen ? "MENU.AZ" : "M"}
+          {isExpanded || isMobileOpen ? "XENGELAND.AZ" : "X"}
         </Link>
       </div>
       <div className="flex flex-col duration-300 ease-linear no-scrollbar">

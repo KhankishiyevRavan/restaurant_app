@@ -7,8 +7,8 @@ export default function Avatars() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Avatars Dashboard"
-        description="This is MENU.AZ Avatars Dashboard page"
+        title="XENGELAND.AZ | Avatars Dashboard"
+        description="This is XENGELAND.AZ Avatars Dashboard page"
       />
       <PageBreadcrumb pageTitle="Avatars" />
       <div className="space-y-5 sm:space-y-6">

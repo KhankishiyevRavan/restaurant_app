@@ -7,8 +7,8 @@ export default function ChooseAddBalanceTables() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Satış üçün istifadəçi seçmə"
-        description="This is MENU.AZ Kontrak List Tables Dashboard page"
+        title="XENGELAND.AZ | Satış üçün istifadəçi seçmə"
+        description="This is XENGELAND.AZ Kontrak List Tables Dashboard page"
       />
       <PageBreadcrumbSub
         modelName="Ödəniş xidmətləri"

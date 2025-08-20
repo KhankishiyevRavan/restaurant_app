@@ -35,7 +35,7 @@ export default function AuthLayout({
             <GridShape />
             <div className="flex flex-col items-center max-w-xs">
               <Link to="/" className="block mb-4 logo-link">
-                MENU.AZ
+                XENGELAND.AZ
               </Link>
               <p className="text-center text-gray-400 dark:text-white/60">
                 {message}

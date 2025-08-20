@@ -7,8 +7,8 @@ export default function ChooseContractTables() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | User List Tables"
-        description="This is MENU.AZ Kontrak List Tables Dashboard page"
+        title="XENGELAND.AZ | User List Tables"
+        description="This is XENGELAND.AZ Kontrak List Tables Dashboard page"
       />
       <PageBreadcrumb pageTitle={`Müqavilə əlavə et`} modelName="Müqavilələr"/>
       <div className="space-y-6">

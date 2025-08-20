@@ -26,7 +26,7 @@ export default function DefaultInputs() {
         </div>
         <div>
           <Label htmlFor="inputTwo">Input with Placeholder</Label>
-          <Input type="text" id="inputTwo" placeholder="info@menu.az" />
+          <Input type="text" id="inputTwo" placeholder="info@xengeland.az" />
         </div>
         <div>
           <Label>Select Input</Label>

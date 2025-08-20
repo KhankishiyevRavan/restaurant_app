@@ -9,8 +9,8 @@ export default function Images() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Images Dashboard"
-        description="This is MENU.AZ Images page"
+        title="XENGELAND.AZ | Images Dashboard"
+        description="This is XENGELAND.AZ Images page"
       />
       <PageBreadcrumb pageTitle="Images" />
       <div className="space-y-5 sm:space-y-6">

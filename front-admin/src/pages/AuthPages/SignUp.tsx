@@ -6,8 +6,8 @@ export default function SignUp() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Sign Up"
-        description="This is MENU.AZ SignUp Tables Dashboard page"
+        title="XENGELAND.AZ | Sign Up"
+        description="This is XENGELAND.AZ SignUp Tables Dashboard page"
       />
       <AuthLayout>
         <SignUpForm />

@@ -118,8 +118,8 @@ const Calendar: React.FC = () => {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Calendar Dashboard"
-        description="This is MENU.AZ Calendar Dashboard page"
+        title="XENGELAND.AZ | Calendar Dashboard"
+        description="This is XENGELAND.AZ Calendar Dashboard page"
       />
       <div className="rounded-2xl border  border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
         <div className="custom-calendar">

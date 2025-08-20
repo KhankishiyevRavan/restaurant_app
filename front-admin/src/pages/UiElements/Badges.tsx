@@ -8,8 +8,8 @@ export default function Badges() {
   return (
     <div>
       <PageMeta
-        title="MENU.AZ | Badges Dashboard"
-        description="This is MENU.AZ Badges Dashboard page"
+        title="XENGELAND.AZ | Badges Dashboard"
+        description="This is XENGELAND.AZ Badges Dashboard page"
       />
       <PageBreadcrumb pageTitle="Badges" />
       <div className="space-y-5 sm:space-y-6">

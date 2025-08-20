@@ -175,7 +175,7 @@ export default function SignInForm() {
                         : ""
                     }
                     name="email"
-                    placeholder="info@menu.az"
+                    placeholder="info@xengeland.az"
                     onChange={handleChange}
                     value={formData.email}
                     // type="email"

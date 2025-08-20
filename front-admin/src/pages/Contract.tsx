@@ -67,8 +67,8 @@ export default function Contract() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Profile Dashboard"
-        description="This is MENU.AZ Profile Dashboard page"
+        title="XENGELAND.AZ | Profile Dashboard"
+        description="This is XENGELAND.AZ Profile Dashboard page"
       />
       <PageBreadcrumbSub
         subTitle={`Müqavilə ${contract?.contractNumber}`}

@@ -6,8 +6,8 @@ export default function ResetPassword() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Şifrə bərpası"
-        description="Bu səhifə MENU.AZ şifrə bərpası səhifəsidir."
+        title="XENGELAND.AZ | Şifrə bərpası"
+        description="Bu səhifə XENGELAND.AZ şifrə bərpası səhifəsidir."
       />
       <AuthLayout>
         <ResetPasswordForm />

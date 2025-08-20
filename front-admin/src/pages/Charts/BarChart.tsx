@@ -7,8 +7,8 @@ export default function BarChart() {
   return (
     <div>
       <PageMeta
-        title="MENU.AZ | Chart Dashboard"
-        description="This is MENU.AZ Chart Dashboard page"
+        title="XENGELAND.AZ | Chart Dashboard"
+        description="This is XENGELAND.AZ Chart Dashboard page"
       />
       <PageBreadcrumb pageTitle="Bar Chart" />
       <div className="space-y-6">

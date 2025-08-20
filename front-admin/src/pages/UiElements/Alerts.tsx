@@ -7,8 +7,8 @@ export default function Alerts() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Alerts Dashboard"
-        description="This is MENU.AZ Alerts Dashboard page"
+        title="XENGELAND.AZ | Alerts Dashboard"
+        description="This is XENGELAND.AZ Alerts Dashboard page"
       />
       <PageBreadcrumb pageTitle="Alerts" />
       <div className="space-y-5 sm:space-y-6">

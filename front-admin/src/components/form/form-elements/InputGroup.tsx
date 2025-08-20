@@ -21,7 +21,7 @@ export default function InputGroup() {
           <Label>E-poçt</Label>
           <div className="relative">
             <Input
-              placeholder="info@menu.az"
+              placeholder="info@xengeland.az"
               type="text"
               className="pl-[62px]"
             />

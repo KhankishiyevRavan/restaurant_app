@@ -8,8 +8,8 @@ export default function Buttons() {
   return (
     <div>
       <PageMeta
-        title="MENU.AZ | Buttons Dashboard"
-        description="This is MENU.AZ Buttons Dashboard page"
+        title="XENGELAND.AZ | Buttons Dashboard"
+        description="This is XENGELAND.AZ Buttons Dashboard page"
       />
       <PageBreadcrumb pageTitle="Buttons" />
       <div className="space-y-5 sm:space-y-6">

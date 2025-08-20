@@ -32,7 +32,7 @@ const AboutPage: React.FC = () => {
         </div>
         <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Menu.az</strong> — MEDI GROUP MMC tərəfindən yaradılmış və
+            <strong>Xengeland.az</strong> — MEDI GROUP MMC tərəfindən yaradılmış və
             idarə olunan, Azərbaycanda kombi və isitmə sistemlərinə texniki
             xidmət və dəstək sahəsində yeni nəsil rəqəmsal platformadır.
             Layihənin məqsədi müasir texnologiyalar vasitəsilə müştəri

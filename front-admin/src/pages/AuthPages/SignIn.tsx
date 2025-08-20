@@ -6,8 +6,8 @@ export default function SignIn() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Daxil olma"
-        description="Bu MENU.AZ-ın daxil olma formudur."
+        title="XENGELAND.AZ | Daxil olma"
+        description="Bu XENGELAND.AZ-ın daxil olma formudur."
       />
       <AuthLayout>
         <SignInForm />

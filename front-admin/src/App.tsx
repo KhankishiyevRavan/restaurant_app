@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
 import SignIn from "./pages/AuthPages/SignIn";
 // import SignUp from "./pages/AuthPages/SignUp";
 import NotFound from "./pages/OtherPage/NotFound";
@@ -14,11 +14,6 @@ import { HelmetProvider } from "react-helmet-async";
 import TitleUpdater from "./components/routes/TitleUpdater";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Menu from "./pages/Menu/Menu";
-import WishlistPage from "./pages/Menu/WishlistPage";
-import ProductDetail from "./pages/Menu/ProductDetail";
-import ServiceFeedback from "./pages/Menu/ServiceFeedback";
-import LoginPage from "./pages/Menu/SignInForm";
 import Home from "./pages/Menu/Home";
 import AddMenu from "./pages/Menu/AddMenu";
 import MenuAdmin from "./pages/Menu/MenuAdmin";
@@ -27,7 +22,6 @@ import WaitersTable from "./pages/Menu/WaitersTable";
 import EditMenu from "./pages/Menu/EditMenu";
 import FeedbackListPage from "./pages/Menu/FeedbackListPage";
 import FeedbackDetailPage from "./pages/Menu/FeedbackDetailPage";
-import PublicLayout from "./layout/PublicLayout";
 
 const AppRoutes = () => {
   const { token, setToken } = useContext(AuthContext);
@@ -60,6 +54,12 @@ const AppRoutes = () => {
             }
           >
             <Route
+              path="/"
+              element={
+                <Navigate to={token ? "/dashboard" : "/signin"} replace />
+              }
+            />
+            <Route
               index
               path="/dashboard"
               element={
@@ -83,18 +83,17 @@ const AppRoutes = () => {
             />
           </Route>
           {/* Auth Layout */}
-          <Route element={<PublicLayout />}>
+          {/* <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/servicefeedback" element={<ServiceFeedback />} />
-          </Route>
+          </Route> */}
           <Route path="/signin" element={<SignIn />} />
-          
 
           {/* Login səhifəsi */}
-          <Route path="/admin" element={<LoginPage />} />
+          {/* <Route path="/admin" element={<LoginPage />} /> */}
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />

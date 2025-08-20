@@ -10,8 +10,8 @@ export default function Videos() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Videos Tabs"
-        description="This is MENU.AZ Videos page"
+        title="XENGELAND.AZ | Videos Tabs"
+        description="This is XENGELAND.AZ Videos page"
       />
       <PageBreadcrumb pageTitle="Videos" />
       <div className="grid grid-cols-1 gap-5 sm:gap-6 xl:grid-cols-2">

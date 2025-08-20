@@ -7,8 +7,8 @@ export default function LineChart() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Chart Dashboard"
-        description="This is MENU.AZ Chart Dashboard page"
+        title="XENGELAND.AZ | Chart Dashboard"
+        description="This is XENGELAND.AZ Chart Dashboard page"
       />
       <PageBreadcrumb pageTitle="Line Chart" />
       <div className="space-y-6">

@@ -6,8 +6,8 @@ export default function NewPassword() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | Şifrəni yenilə"
-        description="Bu səhifə MENU.AZ şifrə yeniləmə səhifəsidir."
+        title="XENGELAND.AZ | Şifrəni yenilə"
+        description="Bu səhifə XENGELAND.AZ şifrə yeniləmə səhifəsidir."
       />
       <AuthLayout>
         <NewPasswordForm />

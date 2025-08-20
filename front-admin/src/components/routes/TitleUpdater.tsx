@@ -74,7 +74,7 @@ const TitleUpdater = () => {
       }
     }
 
-    document.title = pageTitle ? `${pageTitle} | MENU.AZ` : "MENU.AZ";
+    document.title = pageTitle ? `${pageTitle} | XENGELAND.AZ` : "XENGELAND.AZ";
   }, [location.pathname]);
 
   return null;

@@ -6,8 +6,8 @@ export default function PaymentsTables() {
   return (
     <>
       <PageMeta
-        title="MENU.AZ | User List Tables"
-        description="This is MENU.AZ Users List Tables Dashboard page"
+        title="XENGELAND.AZ | User List Tables"
+        description="This is XENGELAND.AZ Users List Tables Dashboard page"
       />
       <PageBreadcrumb pageTitle={`Ödənişlər`} modelName="Ödəniş xidməti" />
       <div className="space-y-6">
