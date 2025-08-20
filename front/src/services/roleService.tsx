@@ -9,9 +9,9 @@ export interface Field {
 }
 
 export interface roleDataInterface {
-  _id?: string;
+  _id: string;
   [x: string]: {};
-  key?: string;
+  key: string;
   name: string;
   showName: string;
   // description: string;

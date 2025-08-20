@@ -1,7 +1,6 @@
 import PageBreadcrumb from "../components/common/PageBreadCrumb";
 import UserMetaCard from "../components/UserProfile/UserMetaCard";
 import UserInfoCard from "../components/UserProfile/UserInfoCard";
-import UserAddressCard from "../components/UserProfile/UserAddressCard";
 import PageMeta from "../components/common/PageMeta";
 import { useEffect, useState } from "react";
 import { getUser, userDataInterface } from "../services/userService";
@@ -38,7 +37,6 @@ export default function UserProfile() {
         <div className="space-y-6">
           {id && <UserMetaCard user={user} id={id} />}
           <UserInfoCard user={user} />
-          {/* {user?.address && <UserAddressCard user={user} />} */}
           {id && <UserContractCard id={id} />}
         </div>
       </div>

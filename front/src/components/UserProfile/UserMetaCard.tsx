@@ -1,8 +1,3 @@
-import { useModal } from "../../hooks/useModal";
-import { Modal } from "../ui/modal";
-import Button from "../ui/button/Button";
-import Input from "../form/input/InputField";
-import Label from "../form/Label";
 import { userDataInterface } from "../../services/userService";
 import { useNavigate } from "react-router";
 interface UserMetaCardProps {
@@ -14,12 +9,6 @@ export default function UserMetaCard({ user, id }: UserMetaCardProps) {
   const navigate = useNavigate();
   console.log(user);
 
-  const { isOpen, openModal, closeModal } = useModal();
-  const handleSave = () => {
-    // Handle save logic here
-    console.log("Saving changes...");
-    closeModal();
-  };
   const capitalizeFirstLetter = (word: string) => {
     if (word.length === 0) return ""; // boş sözlər üçün
     return word.charAt(0).toUpperCase() + word.slice(1);
