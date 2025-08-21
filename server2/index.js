@@ -10,7 +10,7 @@ const feedbackRoutes = require("./routes/feedbackRoutes");
 const waiterRoutes = require("./routes/waiterRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const roleRoutes = require("./routes/roleRoutes");
-
+const contactRoutes = require("./routes/contactRoutes")
 // .env faylını _bu_ qovluqdan oxu
 dotenv.config({ path: path.join(__dirname, ".env") });
 
@@ -49,7 +49,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/waiters", waiterRoutes);
 app.use("/api/service-feedback", feedbackRoutes);
 app.use("/api/menu", menuRoutes);
-
+app.use("/api/contact", contactRoutes);
 /* ---------------- Errors ---------------- */
 // 404 və ümumi errorlar routelardan sonra gəlir
 app.use(notFound);
